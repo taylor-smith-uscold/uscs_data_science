@@ -219,6 +219,14 @@ table.ladder td:first-child{font-weight:400;white-space:nowrap;}
 .aside{font-size:14px;color:var(--faint);font-family:var(--mono);line-height:1.65;}
 
 /* ---------- use-case filter + cards ---------- */
+.filterrow{display:flex;align-items:baseline;gap:14px;margin:0 0 8px;}
+.filterrow:first-of-type{margin-top:1.6em;}
+.filterrow:last-of-type{margin-bottom:1.6em;}
+.filterlab{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--faint);flex:none;width:88px;padding-top:2px;
+}
+.filterrow .filters{margin:0;flex:1;}
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin:1.6em 0 1.4em;}
 .chip{
   appearance:none;cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
@@ -318,6 +326,8 @@ body.searching .results{display:block;}
   .pager .ph{display:none;}
 }
 @media (max-width:520px){
+  .filterrow{flex-direction:column;gap:5px;margin-bottom:12px;}
+  .filterlab{width:auto;}
   .kv{grid-template-columns:minmax(0,1fr);}
   .kv dt{padding:9px 0 0;border-top:1px solid var(--rule-soft);}
   .kv dd{padding:2px 0 9px;border-top:0;}
@@ -329,7 +339,7 @@ body.searching .results{display:block;}
 
 /* ---------- print ---------- */
 @media print{
-  .top,.rail,.toc,.pager,.filters,.skip{display:none!important;}
+  .top,.rail,.toc,.pager,.filters,.filterrow,.skip{display:none!important;}
   .shell{display:block;}
   .main{display:block;padding:0;max-width:none;}
   .doc{max-width:none;}

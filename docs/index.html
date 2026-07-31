@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Data science for a cold storage 3PL — what it is, how a project runs, and worked examples across warehouse operations, labor, transportation, energy, inventory, and commercial teams.">
+<meta name="description" content="An internal guide to what data science is, the kinds of problems it addresses, and how our team works with operations, labor, transportation, energy, inventory, and commercial groups at a cold storage 3PL.">
 <meta name="theme-color" content="#eaedf0" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1317" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Data Science in the Cold Chain — Internal Guide">
-<meta property="og:description" content="An internal reader on what data science is and how it solves problems at a cold storage 3PL.">
-<title>Data Science in the Cold Chain — Internal Guide</title>
+<meta property="og:title" content="Data Science at a Cold Storage 3PL — Internal Guide">
+<meta property="og:description" content="What data science is, the problem types it covers, and worked examples from cold chain operations.">
+<title>Data Science at a Cold Storage 3PL — Internal Guide</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❄</text></svg>">
 <link rel="stylesheet" href="styles.css">
 <noscript><style>
   /* Without JS there is no routing — render every section stacked. */
   .mdoc[hidden]{display:block!important;}
   .mdoc + .mdoc{margin-top:4em;padding-top:3em;border-top:1px solid var(--rule);}
-  .search,.toc,.pager,.filters{display:none!important;}
+  .search,.toc,.pager,.filters,.filterrow{display:none!important;}
 </style></noscript>
 </head>
 <body>
@@ -25,7 +25,7 @@
 
 <header class="top">
   <button class="iconbtn railtoggle" id="railtoggle" aria-label="Show section list" aria-expanded="false">≡</button>
-  <div class="brand"><b>Data&nbsp;Science</b><span>cold chain &amp; 3PL · 7 sections</span></div>
+  <div class="brand"><b>Data&nbsp;Science</b><span>cold chain &amp; 3PL · 8 sections</span></div>
   <div class="grow"></div>
   <div class="search">
     <span class="mag" aria-hidden="true">⌕</span>
@@ -43,7 +43,7 @@
     <div class="arc"><div class="arc-l">Orientation</div><div class="arc-n">start here</div></div>
     <a class="mod" href="#overview" data-doc="overview">
       <span class="mod-n">00</span>
-      <span class="mod-t">Why this guide exists</span>
+      <span class="mod-t">About this guide</span>
       <span class="pill">Intro</span>
     </a>
 
@@ -63,30 +63,35 @@
       <span class="mod-t">Four levels of analytics</span>
       <span class="pill">Model</span>
     </a>
+    <a class="mod" href="#problems" data-doc="problems">
+      <span class="mod-n">04</span>
+      <span class="mod-t">Kinds of problems</span>
+      <span class="pill">Types</span>
+    </a>
 
     <div class="arc"><div class="arc-l">Part two</div><div class="arc-n">applied</div></div>
     <a class="mod" href="#usecases" data-doc="usecases">
-      <span class="mod-n">04</span>
-      <span class="mod-t">Use cases in cold storage</span>
+      <span class="mod-n">05</span>
+      <span class="mod-t">Examples from our operations</span>
       <span class="pill">15</span>
     </a>
 
     <div class="arc"><div class="arc-l">Part three</div><div class="arc-n">working together</div></div>
     <a class="mod" href="#engage" data-doc="engage">
-      <span class="mod-n">05</span>
+      <span class="mod-n">06</span>
       <span class="mod-t">Bringing us a problem</span>
       <span class="pill">Process</span>
     </a>
     <a class="mod" href="#glossary" data-doc="glossary">
-      <span class="mod-n">06</span>
-      <span class="mod-t">Plain-language glossary</span>
+      <span class="mod-n">07</span>
+      <span class="mod-t">Glossary</span>
       <span class="pill">Ref</span>
     </a>
 
     <div class="railfoot">
       Data Science &amp; Analytics<br>
       internal enablement<br>
-      <span class="railfoot-note">Examples are illustrative problem types, not published results.</span>
+      <span class="railfoot-note">Examples describe problem types we can work on. They are not published results.</span>
     </div>
   </nav>
 
@@ -95,33 +100,39 @@
       <article class="doc" id="doc">
 
 <!-- ═════════════════════════ 00 · OVERVIEW ═════════════════════════ -->
-<section class="mdoc" id="overview" data-title="Why this guide exists">
+<section class="mdoc" id="overview" data-title="About this guide">
   <div class="eyebrow"><span class="num">00</span><span>Orientation</span><span class="tag">Intro</span></div>
-  <h1>Turning cold chain data into decisions you can act on</h1>
+  <h1>Data science at a cold storage 3PL</h1>
 
-  <p><em>Every pallet we receive, every door we open, every degree we hold, and every mile we drive leaves a
-  data trail. Data science is the discipline of turning that trail into forecasts, recommendations, and
-  automated decisions — so operators, planners, and commercial teams spend less time reacting and more
-  time getting ahead.</em></p>
+  <p><em>An internal guide to what our team does and the kinds of problems we can help
+  with. It is written for people who know the business well and have no particular reason
+  to know how modeling works.</em></p>
 
-  <p>This guide is written for internal users who are not data specialists. It assumes you know the
-  business cold and the modeling not at all, which is the right way round: the hardest part of any
-  project is knowing which question matters, and that knowledge lives on the floor, in the yard, and in
-  the account reviews — not in the model.</p>
+  <p>The systems that run a cold storage operation record a great deal of what happens in
+  a building. Receipts, picks, appointments, gate times, temperature readings, work
+  orders, and billing transactions all leave a record, and most of that record is used
+  once at the moment of the transaction and then sits in a database. Data science is the
+  work of going back through it: answering questions that a single report cannot settle,
+  and producing estimates about things that have not happened yet.</p>
 
-  <h2 id="ov-questions">Four questions, four levels of leverage</h2>
+  <p>We wrote this guide because the most common reason a worthwhile project never starts
+  is that the person closest to the problem did not realize it was the sort of thing to
+  ask about. Sections 04 and 05 are aimed at that specifically.</p>
 
-  <p>Analytics work climbs a ladder. Each rung answers a different kind of question, and each one is
-  worth more than the one below it because it moves closer to the decision itself.</p>
+  <h2 id="ov-questions">Four kinds of question</h2>
+
+  <p>Analytics work is conventionally sorted into four levels. The distinction is useful
+  mainly because it indicates what sort of answer to expect and roughly how much work is
+  involved in getting there.</p>
 
   <div class="tablewrap">
   <table>
     <thead><tr><th>Level</th><th>The question</th><th>In our business</th></tr></thead>
     <tbody>
       <tr><td>Descriptive</td><td>What happened?</td><td>What did the warehouse receive yesterday, by customer and zone?</td></tr>
-      <tr><td>Diagnostic</td><td>Why did it happen?</td><td>Why did dock dwell spike on Tuesdays last month?</td></tr>
+      <tr><td>Diagnostic</td><td>Why did it happen?</td><td>Why did dock dwell run high on Tuesdays last month?</td></tr>
       <tr><td>Predictive</td><td>What is likely next?</td><td>How many inbound pallets should we staff for next week?</td></tr>
-      <tr><td>Prescriptive</td><td>What should we do?</td><td>Which slots should we re-profile tonight, in what order?</td></tr>
+      <tr><td>Prescriptive</td><td>What should we do?</td><td>Which slots should we re-profile tonight, and in what order?</td></tr>
     </tbody>
   </table>
   </div>
@@ -130,25 +141,26 @@
 
   <h2 id="ov-read">How to read this guide</h2>
 
-  <p>The three parts stand on their own. If you are here to find out whether data science can help with a
-  specific headache, skip straight to <a href="#usecases" data-goto="usecases">the use cases</a> and
-  filter by your function. If you already have a problem in mind and want to know what happens next,
-  <a href="#engage" data-goto="engage">Bringing us a problem</a> describes the intake.</p>
+  <p>The sections are arranged to be read in order the first time through, though nothing
+  depends on that. If you already have a specific problem in mind,
+  <a href="#problems">section 04</a> lists the types of problems we work on and
+  <a href="#usecases">section 05</a> gives examples from our own operations.
+  <a href="#engage">Section 06</a> covers what to bring to a first conversation.</p>
 
   <dl class="kv kv-loose">
     <dt>Part one</dt>
-    <dd>What the discipline is, how a project actually runs week to week, and the four levels of analytics
-        in more depth. Roughly fifteen minutes.</dd>
+    <dd>Sections 01 to 04: what the discipline is, how a project runs week to week, the
+        four levels of analytics, and a catalogue of problem types.</dd>
     <dt>Part two</dt>
-    <dd>Fifteen worked examples drawn from cold storage and 3PL operations, each with the data it needs,
-        the approach, and what an internal user receives.</dd>
+    <dd>Section 05: fifteen examples drawn from cold storage and 3PL operations, each with
+        the data it needs and the output it produces.</dd>
     <dt>Part three</dt>
-    <dd>How to frame a problem so we can act on it, what makes a good candidate, and the vocabulary
-        you'll hear in a kickoff.</dd>
+    <dd>Sections 06 and 07: how to frame a problem so we can act on it, and definitions
+        for the terms that come up in a project kickoff.</dd>
   </dl>
 
-  <p class="aside">Search is available in the top bar, or press <kbd class="k">/</kbd> from anywhere.
-  It covers every section of the guide.</p>
+  <p class="aside">Search covers every section. The box is in the top bar, or press
+  <kbd class="k">/</kbd> from anywhere.</p>
 </section>
 
 <!-- ═════════════════════════ 01 · WHAT IT IS ═════════════════════════ -->
@@ -156,14 +168,16 @@
   <div class="eyebrow"><span class="num">01</span><span>Foundations</span><span class="tag">Primer</span></div>
   <h1>What data science is</h1>
 
-  <p><em>The practice of using data, statistics, and software to answer questions and make better
-  decisions — and, just as importantly, to say how confident we are in the answer.</em></p>
+  <p><em>A working definition: using data, statistics, and software to answer questions
+  that bear on a decision, and being explicit about how much confidence the answer
+  deserves.</em></p>
 
-  <p>Data science sits where three things overlap: the <strong>mathematics</strong> that tells you whether
-  a pattern is real, the <strong>engineering</strong> that makes data usable at scale, and the
-  <strong>domain knowledge</strong> that tells you which questions are worth asking in the first place.
-  Miss any one of the three and you get something that looks impressive in a slide deck but changes
-  nothing about what anyone does on Monday morning.</p>
+  <p>The field draws on three things at once. Statistics tells us whether a pattern in the
+  data is real or the kind of variation that appears by chance. Engineering makes the data
+  available in a workable form, on a schedule, without someone assembling it by hand each
+  time. Domain knowledge determines whether the question is worth asking. Work that is
+  short on any one of the three usually stalls, though the symptom differs depending on
+  which one is missing.</p>
 
   <h2 id="w-pillars">The three pillars</h2>
 
@@ -171,143 +185,162 @@
     <div class="pillar">
       <span class="pillar-n">Ⅰ</span>
       <h3>Statistics &amp; modeling</h3>
-      <p>Separating signal from noise. Is throughput really down, or is this ordinary week-to-week
-      variation? Statistics quantifies uncertainty so we don't chase randomness. Machine learning extends
-      it — learning patterns from history in order to score or forecast situations we haven't seen yet.</p>
+      <p>Most operational numbers move around from week to week for no particular reason.
+      Statistical methods estimate how much of an observed change is ordinary variation
+      and how much is something new, and they attach a margin of error to the figures we
+      report. Machine learning extends the same idea: rather than testing a relationship
+      we already suspect, the method searches the historical record for one, and we then
+      check whether it holds on data it was not fitted to.</p>
     </div>
     <div class="pillar">
       <span class="pillar-n">Ⅱ</span>
       <h3>Data &amp; software engineering</h3>
-      <p>A model is worthless if it can't be fed. This is the plumbing: pulling from the WMS, TMS, ERP,
-      telemetry, and refrigeration controls; reconciling customer and item master data; and delivering
-      results into a dashboard, an alert, or the system an operator already has open.</p>
+      <p>Putting a model to use requires a supply of data on a schedule. In practice that
+      means reading from the WMS, TMS, ERP, refrigeration controls, and telemetry systems,
+      reconciling customer and item identifiers that do not always agree between them, and
+      placing the result somewhere a person will encounter it in the course of their work.
+      In most projects this accounts for more of the effort than the modeling does.</p>
     </div>
     <div class="pillar">
       <span class="pillar-n">Ⅲ</span>
       <h3>Domain knowledge</h3>
-      <p>Knowing that a blast freeze order behaves nothing like a dry-pick order, that catch-weight items
-      complicate every unit conversion, and that FSMA and lot traceability are non-negotiable. The domain
-      expert in the room is usually you — which is why these projects are partnerships, not deliveries.</p>
+      <p>A blast freeze order and a dry-pick order look similar in a transaction table and
+      behave nothing alike. Catch-weight items complicate every conversion between cases,
+      pounds, and pallets. Lot traceability and FSMA requirements constrain what a
+      recommendation is permitted to suggest. We depend on the people who work with these
+      things daily to tell us when a result does not match what they observe.</p>
     </div>
   </div>
 
   <hr>
 
-  <h2 id="w-isnt">What it is, and what it isn't</h2>
+  <h2 id="w-isnt">Common misconceptions</h2>
 
-  <p>Expectations do more damage than models do. It is worth being blunt about both sides.</p>
+  <p>A few points come up often enough in first conversations that they are worth stating
+  directly.</p>
 
   <div class="twoup">
     <div class="panel panel-a">
-      <h4>It is</h4>
+      <h4>What it does</h4>
       <ul>
-        <li>A way to answer questions a single report can't — because the answer depends on many
-            interacting factors.</li>
-        <li>Quantified uncertainty: <em>most likely 1,240 pallets, and rarely above 1,600</em>.</li>
-        <li>A repeatable process, versioned and monitored, that runs whether or not an analyst is at
-            their desk.</li>
-        <li>Decision support. The judgment stays with the operator, planner, or account manager.</li>
+        <li>Answers questions where the outcome depends on several factors at once, which
+            is the usual reason a report has not settled the matter.</li>
+        <li>Produces estimates with a stated range: a most likely value of 1,240 pallets,
+            with an upper end near 1,600.</li>
+        <li>Runs on a schedule once built, so the output does not depend on an analyst
+            being at their desk.</li>
+        <li>Supports a decision. The person accountable for it still makes it.</li>
       </ul>
     </div>
     <div class="panel panel-b">
-      <h4>It isn't</h4>
+      <h4>What it does not do</h4>
       <ul>
-        <li>A crystal ball. Models learn from history; genuinely new conditions still require human
-            judgment.</li>
-        <li>A substitute for clean data. Bad receipts and a stale item master produce confident nonsense.</li>
-        <li>Just dashboards. Reporting tells you what happened; data science tells you what is likely next
-            and what to do about it.</li>
-        <li>A replacement for the people doing the work. It removes guesswork, not expertise.</li>
+        <li>Anticipate conditions with no precedent. Models are fitted to history, and a
+            genuinely new situation falls outside what they have seen.</li>
+        <li>Correct errors in the source systems. Bad receipts or an out-of-date item
+            master propagate into the output, often with no visible sign.</li>
+        <li>Replace reporting. Descriptive reporting answers what happened, and a good
+            deal of the time that is the whole question.</li>
+        <li>Substitute for operational experience. It narrows the range a person has to
+            judge between.</li>
       </ul>
     </div>
   </div>
 
-  <blockquote>
-    <p>The useful test is not <em>“is this sophisticated?”</em> but <em>“if this were right, would anyone
-    do anything differently?”</em> A model nobody acts on is an expensive opinion.</p>
-  </blockquote>
+  <p>Before starting anything, we try to establish what would change if the answer were
+  available and reliable. If the decision would be made the same way regardless, that is
+  worth knowing at the outset rather than several weeks in.</p>
 </section>
 
 <!-- ═════════════════════════ 02 · HOW IT WORKS ═════════════════════════ -->
 <section class="mdoc" id="how" data-title="How a project runs" hidden>
   <div class="eyebrow"><span class="num">02</span><span>Foundations</span><span class="tag">Method</span></div>
-  <h1>How a data science project actually runs</h1>
+  <h1>How a project runs</h1>
 
-  <p><em>Projects follow a loop, not a straight line. It is normal — and healthy — to reach step four,
-  learn something surprising, and go back to step one with a sharper question.</em></p>
+  <p><em>Projects rarely proceed straight through. Reaching the modeling stage and finding
+  something in the data that sends you back to the framing conversation is a normal
+  outcome rather than a sign that something has gone wrong.</em></p>
 
   <h2 id="h-steps">The seven steps</h2>
 
   <ol class="steps">
     <li>
       <h3>Frame the decision</h3>
-      <p>Who decides what, how often, and what would they do differently with a better answer? If nothing
-      changes, the project stops here — on purpose, and early, while it is cheap to stop.</p>
+      <p>Establish who makes the decision, how often it comes up, and what they would do
+      differently with a better answer. We would rather learn at this stage that the answer
+      would not change anything, since stopping here costs a conversation.</p>
     </li>
     <li>
-      <h3>Gather &amp; understand the data</h3>
-      <p>Locate the sources, learn how the fields are really populated in practice rather than in the
-      documentation, and write down the gaps. This is usually the longest step, and skipping it is the
-      most common way a project fails late instead of early.</p>
+      <h3>Gather and understand the data</h3>
+      <p>Find the sources and learn how the fields are populated in practice, which is not
+      always how they are documented. Gaps get written down rather than quietly worked
+      around. This step generally takes longer than people expect, and shortening it tends
+      to move a project's problems later rather than remove them.</p>
     </li>
     <li>
-      <h3>Prepare &amp; explore</h3>
-      <p>Clean, join, and shape the data. Explore it alongside the business expert to confirm that what
-      the numbers say matches what the floor sees. Disagreements here are findings, not annoyances.</p>
+      <h3>Prepare and explore</h3>
+      <p>Clean, join, and shape the data, then go through it with whoever knows the
+      process. Where the numbers and the floor disagree, the disagreement is usually
+      informative in its own right.</p>
     </li>
     <li>
       <h3>Model</h3>
-      <p>Start with the simplest thing that could work, then earn complexity. A well-tuned baseline that
-      people trust beats an elaborate model that nobody opens.</p>
+      <p>Begin with a simple method and add complexity only where it measurably improves
+      the result. Simpler models are also easier to explain, which bears directly on
+      whether anyone ends up acting on the output.</p>
     </li>
     <li>
       <h3>Validate</h3>
-      <p>Test on data the model has never seen, arranged in the same shape as the real decision — for
-      example, forecasting next week using only what we would have known last week. Anything else
-      flatters the model.</p>
+      <p>Test on data the model has not seen, arranged the way the real decision is
+      arranged. For a forecast, that means predicting a week using only information
+      available before that week began. Measuring performance on the data a model was
+      fitted to will overstate its accuracy, sometimes substantially.</p>
     </li>
     <li>
       <h3>Deploy into the workflow</h3>
-      <p>Deliver the output where the decision is made: a report, an alert, a screen in an existing
-      system. Adoption is a design problem, not an afterthought.</p>
+      <p>Put the output where the decision happens: a report, an alert, or a screen in a
+      system already in use. We try to settle this early, since it often constrains what
+      the model can look like.</p>
     </li>
     <li>
-      <h3>Monitor &amp; improve</h3>
-      <p>Track accuracy and usage over time. Business conditions drift — new customers, new SKUs, new
-      sites — and models must be retrained to keep up.</p>
+      <h3>Monitor and improve</h3>
+      <p>Track accuracy and use after release. Customers, SKUs, and sites change, and a
+      model fitted to last year's conditions will gradually drift away from current ones.
+      Retraining is part of operating the system.</p>
     </li>
   </ol>
 
   <hr>
 
-  <h2 id="h-rule">A rule of thumb</h2>
+  <h2 id="h-rule">Framing a project well</h2>
 
-  <blockquote>
-    <p>A good project is defined by the decision it improves, not the technique it uses.</p>
-  </blockquote>
+  <p>The technique matters less than the decision it feeds. As an illustration,
+  <em>“forecast inbound volume with a neural network”</em> does not describe a project. It
+  names a method with no stated user, timing, or purpose, and there is no way to tell
+  whether it succeeded. <em>“Give the shift planner a seven-day pallet forecast by Thursday
+  afternoon, so labor can be scheduled against it”</em> does describe one: it identifies who
+  receives the output, when they need it, and what they will do with it. Requests that
+  arrive in the second form are considerably easier to evaluate, and we can usually help
+  turn one into the other during intake.</p>
 
-  <p><em>“Forecast inbound volume with a neural network”</em> is a solution looking for a problem.
-  <em>“Give the shift planner a seven-day pallet forecast by 3&nbsp;p.m. Thursday, so labor can be
-  scheduled with confidence”</em> is a project: it names the user, the timing, the output, and the
-  decision it feeds.</p>
-
-  <h2 id="h-time">What the calendar looks like</h2>
+  <h2 id="h-time">Typical timeline</h2>
 
   <div class="tablewrap">
   <table>
     <thead><tr><th>Stage</th><th>Typical span</th><th>What comes out of it</th></tr></thead>
     <tbody>
-      <tr><td>Intake</td><td>Week 0</td><td>The problem restated as a decision, and a shared view of whether it is worth solving</td></tr>
-      <tr><td>Feasibility</td><td>Weeks 1–2</td><td>An honest go / no-go: does the data exist, and is there signal in it?</td></tr>
+      <tr><td>Intake</td><td>Week 0</td><td>The problem restated as a decision, and a shared view of whether it is worth pursuing</td></tr>
+      <tr><td>Feasibility</td><td>Weeks 1–2</td><td>A go or no-go on data availability and signal, with the reasoning behind it</td></tr>
       <tr><td>Prototype</td><td>Weeks 3–8</td><td>A working model reviewed with the business expert and tested against history</td></tr>
-      <tr><td>Pilot</td><td>Ongoing</td><td>One site running it for real, with accuracy and adoption tracked</td></tr>
-      <tr><td>Production</td><td>Ongoing</td><td>Automated refresh, monitoring, retraining, and expansion where it holds up</td></tr>
+      <tr><td>Pilot</td><td>Ongoing</td><td>One site running it for real, with accuracy and use tracked</td></tr>
+      <tr><td>Production</td><td>Ongoing</td><td>Automated refresh, monitoring, retraining, and extension to other sites where results hold</td></tr>
     </tbody>
   </table>
   </div>
 
-  <p class="aside">Spans are indicative. A well-scoped forecasting problem on clean WMS data moves faster
-  than an optimization problem that first needs a new data capture step on the floor.</p>
+  <p class="aside">These spans are rough. A forecasting problem on clean WMS data moves
+  faster than an optimization problem that first requires a new data capture step on the
+  floor.</p>
 </section>
 
 <!-- ═════════════════════════ 03 · MATURITY ═════════════════════════ -->
@@ -315,10 +348,10 @@
   <div class="eyebrow"><span class="num">03</span><span>Foundations</span><span class="tag">Model</span></div>
   <h1>Four levels of analytics</h1>
 
-  <p><em>Each level answers a different question and delivers more leverage than the last. Most teams
-  already live on the first two rungs; data science is how you climb to the third and fourth.</em></p>
+  <p><em>The four levels describe what kind of question is being answered. The level a
+  question sits at determines what data is required and how much work is involved.</em></p>
 
-  <h2 id="m-ladder">The ladder</h2>
+  <h2 id="m-ladder">The four levels</h2>
 
   <div class="tablewrap">
   <table class="ladder">
@@ -329,26 +362,26 @@
       <tr>
         <td><span class="lvl lvl-d">Descriptive</span></td>
         <td>What happened?</td>
-        <td>Standard reporting and dashboards over recorded activity.</td>
+        <td>Reporting and dashboards over recorded activity.</td>
         <td>Yesterday's receipts by customer and temperature zone.</td>
       </tr>
       <tr>
         <td><span class="lvl lvl-d">Diagnostic</span></td>
         <td>Why did it happen?</td>
-        <td>Drill-down, segmentation, and statistical testing to isolate the drivers behind a number.</td>
+        <td>Drill-down, segmentation, and statistical testing to isolate what drove a number.</td>
         <td>Overtime rose because three customers shifted arrivals into the same window.</td>
       </tr>
       <tr>
         <td><span class="lvl lvl-p">Predictive</span></td>
         <td>What is likely to happen?</td>
-        <td>Models trained on history estimate future values or probabilities, with a stated confidence range.</td>
-        <td>Expected inbound pallets per site per day for the next fourteen days.</td>
+        <td>Models fitted to history estimate future values or probabilities, with a stated range.</td>
+        <td>Expected inbound pallets per site per day over the next fourteen days.</td>
       </tr>
       <tr>
         <td><span class="lvl lvl-x">Prescriptive</span></td>
         <td>What should we do about it?</td>
-        <td>Optimization and simulation turn a prediction into a recommended action under real constraints.</td>
-        <td>The dock-door and appointment plan that minimizes trailer dwell tomorrow.</td>
+        <td>Optimization and simulation turn an estimate into a recommended action under real constraints.</td>
+        <td>The dock-door and appointment plan that reduces trailer dwell tomorrow.</td>
       </tr>
     </tbody>
   </table>
@@ -356,77 +389,400 @@
 
   <hr>
 
-  <h2 id="m-climb">Why the climb matters</h2>
+  <h2 id="m-climb">How the levels build on each other</h2>
 
-  <p>A descriptive report tells a supervisor that overtime ran high last week. A diagnostic analysis tells
-  them it happened because three customers' arrivals collided on Tuesday afternoons. A predictive model
-  tells them it is going to happen again next Tuesday. A prescriptive system tells them which
-  appointments to move, and by how much, to prevent it — while respecting carrier windows, door
-  capacity, and the labor actually on shift.</p>
+  <p>Take overtime running high in a given week. Descriptive reporting shows that it
+  happened. A diagnostic analysis attributes it to three customers' arrivals landing in
+  the same window on Tuesday afternoons. A predictive model estimates that the same
+  collision is likely again next Tuesday. A prescriptive system proposes which
+  appointments to move and by how much, subject to carrier windows, door capacity, and the
+  labor actually on shift.</p>
 
-  <p>Each rung is built on the one below. There is no skipping to prescriptive optimization in a process
-  where the descriptive data is unreliable, which is why early projects often deliver unglamorous data
-  quality work as their first real output.</p>
+  <p>Each level depends on the ones beneath it. Prescriptive optimization built on
+  unreliable descriptive data will produce confident recommendations that are wrong, so the
+  first weeks of a project are often spent on data quality rather than modeling. This is
+  not the most visible kind of output, but it is frequently what the early phase of the
+  work consists of.</p>
 
   <div class="callout">
     <h4>Where the effort goes</h4>
-    <p>In practice the first two rungs are largely a reporting and data engineering problem, and the upper
-    two are where modeling earns its keep. Teams that feel stuck on rung one usually have a data capture
-    gap, not a modeling gap — and that is a much cheaper problem to fix.</p>
+    <p>The first two levels are largely a reporting and data engineering problem. The
+    upper two are where modeling contributes most. A team that feels stuck at the
+    descriptive level often has a data capture gap rather than a modeling gap, and of the
+    two that is usually the cheaper to address.</p>
   </div>
 </section>
 
-<!-- ═════════════════════════ 04 · USE CASES ═════════════════════════ -->
-<section class="mdoc wide" id="usecases" data-title="Use cases in cold storage" hidden>
-  <div class="eyebrow"><span class="num">04</span><span>Applied</span><span class="tag">15 cases</span></div>
-  <h1>Where it pays off in a cold storage 3PL</h1>
+<!-- ═════════════════════════ 04 · PROBLEM TYPES ═════════════════════════ -->
+<section class="mdoc wide" id="problems" data-title="Kinds of problems" hidden>
+  <div class="eyebrow"><span class="num">04</span><span>Foundations</span><span class="tag">Types</span></div>
+  <h1>Kinds of problems</h1>
 
-  <p><em>Illustrative of the problem shapes data science handles well in our industry. Each one names the
-  pain, the data it draws on, the approach, and what an internal user actually receives.</em></p>
+  <p><em>Most requests we receive turn out to be one of a fairly small number of problem
+  types. Recognizing which one you have indicates what data is needed and what form the
+  answer will take.</em></p>
 
-  <div class="filters" role="group" aria-label="Filter use cases by function">
-    <button class="chip on" data-filter="all" aria-pressed="true">All <span class="ct">15</span></button>
-    <button class="chip" data-filter="ops" aria-pressed="false">Warehouse ops</button>
-    <button class="chip" data-filter="labor" aria-pressed="false">Labor</button>
-    <button class="chip" data-filter="transport" aria-pressed="false">Transportation</button>
-    <button class="chip" data-filter="energy" aria-pressed="false">Energy &amp; refrigeration</button>
-    <button class="chip" data-filter="inventory" aria-pressed="false">Inventory &amp; quality</button>
-    <button class="chip" data-filter="commercial" aria-pressed="false">Commercial &amp; finance</button>
+  <p>The categories below overlap, and a real project often chains two or three of them
+  together. A dock scheduling system, for example, estimates how long each load will take
+  to service, which is regression, and then uses those estimates to build a door plan,
+  which is optimization. The purpose of the list is not precise classification. It is to
+  supply enough vocabulary that you can recognize when something you deal with regularly
+  is a candidate for this kind of work.</p>
+
+  <h2 id="p-match">Matching a question to a problem type</h2>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>If you are asking</th><th>The problem type is</th><th>What comes back</th></tr></thead>
+    <tbody>
+      <tr><td>How many, how much, how long?</td><td>Regression</td><td>A number, with a range around it</td></tr>
+      <tr><td>Will this happen? Which category is it?</td><td>Classification</td><td>A probability, or a label</td></tr>
+      <tr><td>How much on each of the next N days?</td><td>Time-series forecasting</td><td>A dated series with intervals</td></tr>
+      <tr><td>When is this likely to occur?</td><td>Time-to-event</td><td>A probability curve over time</td></tr>
+      <tr><td>Which of these should we handle first?</td><td>Ranking</td><td>An ordered worklist</td></tr>
+      <tr><td>What natural groups exist here?</td><td>Clustering</td><td>Group assignments and profiles</td></tr>
+      <tr><td>Is this unusual?</td><td>Anomaly detection</td><td>A flag with a deviation score</td></tr>
+      <tr><td>What tends to occur together?</td><td>Affinity</td><td>Co-occurrence pairs and sets</td></tr>
+      <tr><td>Can these many measures be summarized?</td><td>Dimensionality reduction</td><td>A few composite indices</td></tr>
+      <tr><td>What is the best plan under our constraints?</td><td>Optimization</td><td>A specific recommended plan</td></tr>
+      <tr><td>What would happen if we changed this?</td><td>Simulation</td><td>A distribution of outcomes per scenario</td></tr>
+      <tr><td>Did the change cause the result?</td><td>Causal inference</td><td>An effect estimate with uncertainty</td></tr>
+      <tr><td>What is recorded in all this free text?</td><td>Text mining</td><td>Structured fields from notes</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <hr>
+
+  <h2 id="p-supervised">Supervised: learning from recorded outcomes</h2>
+
+  <p>These methods learn from examples where the answer was recorded. They require history
+  in which the thing you want to predict was actually measured and stored. Without that
+  record none of them are available, however much other data exists, which is why a
+  feasibility check often comes down to whether outcomes were captured.</p>
+
+  <div class="cards">
+
+    <article class="card" data-fam="supervised">
+      <div class="card-h"><span class="lvl lvl-p">Number</span><span class="fn">Supervised</span></div>
+      <h3>Regression</h3>
+      <p class="prob">Estimates a numeric quantity from other things known at the time.
+      The model is fitted on past cases where both the inputs and the resulting number
+      were recorded.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>How many, how much, how long.</dd>
+        <dt>Needs</dt><dd>Historical records where the value was measured, together with the conditions that preceded it.</dd>
+        <dt>Returns</dt><dd>A predicted number, normally with a range around it.</dd>
+        <dt>Here</dt><dd>Expected minutes to unload a load; cost to serve for a proposed account; expected pick time for an order profile.</dd>
+        <dt>Watch for</dt><dd>The range matters as much as the estimate. A prediction of 47 minutes that could plausibly fall between 20 and 90 is a different planning input than one that falls between 44 and 50.</dd>
+      </dl>
+    </article>
+
+    <article class="card" data-fam="supervised">
+      <div class="card-h"><span class="lvl lvl-p">Category</span><span class="fn">Supervised</span></div>
+      <h3>Classification</h3>
+      <p class="prob">Assigns a case to one of a set of categories, usually returning a
+      probability for each rather than a hard label.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>Will this happen? Which of these categories does it belong to?</dd>
+        <dt>Needs</dt><dd>History where the outcome category was recorded, with enough examples of the rarer category to learn from.</dd>
+        <dt>Returns</dt><dd>A probability, which becomes a yes or no once a threshold is chosen.</dd>
+        <dt>Here</dt><dd>Whether a load will miss its delivery window; whether an inventory adjustment is likely to be an error.</dd>
+        <dt>Watch for</dt><dd>Where the outcome is rare, overall accuracy is misleading, since predicting “no” every time can score well and be useless. Choosing the threshold is a business decision about the relative cost of a false alarm and a miss.</dd>
+      </dl>
+    </article>
+
+    <article class="card" data-fam="supervised">
+      <div class="card-h"><span class="lvl lvl-p">Dated series</span><span class="fn">Supervised</span></div>
+      <h3>Time-series forecasting</h3>
+      <p class="prob">Projects a quantity forward over time, where the order of the
+      observations carries information. Trend, seasonality, and day-of-week effects are
+      modeled explicitly.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>How much on each of the next N days or weeks?</dd>
+        <dt>Needs</dt><dd>A consistent history of the quantity over time, ideally covering several cycles of whatever seasonality matters.</dd>
+        <dt>Returns</dt><dd>A value per future period, with intervals that widen further out.</dd>
+        <dt>Here</dt><dd>Pallets received per site per day; case volume by customer through a seasonal peak.</dd>
+        <dt>Watch for</dt><dd>Known future events such as a promotion, a customer onboarding, or a plant shutdown have to be supplied as inputs. The model cannot infer them from history.</dd>
+      </dl>
+    </article>
+
+    <article class="card" data-fam="supervised">
+      <div class="card-h"><span class="lvl lvl-p">Duration</span><span class="fn">Supervised</span></div>
+      <h3>Time-to-event</h3>
+      <p class="prob">Estimates how long until something occurs, while correctly handling
+      the records for which it has not occurred yet. Also called survival analysis.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>When is this likely to happen? What is the chance it happens within the next N months?</dd>
+        <dt>Needs</dt><dd>Records with a start date and either an event date or confirmation that the event had not occurred as of a known date.</dd>
+        <dt>Returns</dt><dd>A probability curve over time rather than a single date.</dd>
+        <dt>Here</dt><dd>Time until a piece of equipment needs unplanned service; tenure patterns across a hiring cohort.</dd>
+        <dt>Watch for</dt><dd>The treatment of records where the event has not happened yet is the whole point of the method. Dropping them, or treating them as if the event never occurs, biases the result in opposite directions.</dd>
+      </dl>
+    </article>
+
+    <article class="card" data-fam="supervised">
+      <div class="card-h"><span class="lvl lvl-p">Ordered list</span><span class="fn">Supervised</span></div>
+      <h3>Ranking</h3>
+      <p class="prob">Orders a set of items by expected value or risk so that limited
+      effort goes where it is worth most. Usually built on top of a regression or
+      classification model.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>Given that we can only get to twenty of these today, which twenty?</dd>
+        <dt>Needs</dt><dd>A per-item estimate of value or risk, and a realistic view of the capacity available to act on it.</dd>
+        <dt>Returns</dt><dd>An ordered worklist, ideally cut to the length that can actually be worked.</dd>
+        <dt>Here</dt><dd>Which locations to cycle count first; which accounts an account manager should contact this month.</dd>
+        <dt>Watch for</dt><dd>A list longer than the available capacity tends to be ignored altogether. Sizing the output to the work that can realistically be done is part of the design.</dd>
+      </dl>
+    </article>
+
+  </div>
+
+  <h2 id="p-unsupervised">Unsupervised: finding structure with no recorded outcome</h2>
+
+  <p>These methods do not need a recorded answer to learn from. They describe structure
+  already present in the data. Because there is no ground truth to check against, results
+  are judged on whether they are useful and whether they survive review by someone who
+  knows the operation.</p>
+
+  <div class="cards">
+
+    <article class="card" data-fam="unsupervised">
+      <div class="card-h"><span class="lvl lvl-d">Groups</span><span class="fn">Unsupervised</span></div>
+      <h3>Clustering</h3>
+      <p class="prob">Groups records that resemble one another across many attributes at
+      once, without being told in advance what the groups should be.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>What natural groupings exist in this population?</dd>
+        <dt>Needs</dt><dd>A set of comparable attributes per record. No recorded outcome required.</dd>
+        <dt>Returns</dt><dd>A group assignment per record, and a profile of what makes each group distinct.</dd>
+        <dt>Here</dt><dd>SKU handling profiles as an input to slotting policy; customer segments defined by how accounts actually use the building rather than by size.</dd>
+        <dt>Watch for</dt><dd>There is no correct number of groups and no objective right answer. Clusters are worth keeping when they imply a different action for each group. Otherwise they are a description with nothing attached to it.</dd>
+      </dl>
+    </article>
+
+    <article class="card" data-fam="unsupervised">
+      <div class="card-h"><span class="lvl lvl-d">Flags</span><span class="fn">Unsupervised</span></div>
+      <h3>Anomaly detection</h3>
+      <p class="prob">Learns the normal range of behavior for a process or asset and flags
+      departures from it. Useful where the failure modes are too varied or too rare to
+      enumerate as fixed rules.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>Is this reading, transaction, or pattern unusual for this asset or process?</dd>
+        <dt>Needs</dt><dd>Enough history of normal operation. Recorded examples of failures help but are not strictly required.</dd>
+        <dt>Returns</dt><dd>A flag with a score indicating how far the observation sits from normal.</dd>
+        <dt>Here</dt><dd>A compressor drawing more power than its own history would predict; unusual adjustment patterns at a location.</dd>
+        <dt>Watch for</dt><dd>Unusual is not the same as wrong. Every anomaly system needs a route for someone to confirm or dismiss a flag, and that feedback is what keeps the alert volume manageable.</dd>
+      </dl>
+    </article>
+
+    <article class="card" data-fam="unsupervised">
+      <div class="card-h"><span class="lvl lvl-d">Co-occurrence</span><span class="fn">Unsupervised</span></div>
+      <h3>Affinity</h3>
+      <p class="prob">Identifies items or events that occur together more often than
+      chance alone would explain.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>What tends to appear alongside what?</dd>
+        <dt>Needs</dt><dd>Transaction records that group items into baskets, orders, or events.</dd>
+        <dt>Returns</dt><dd>Pairs or sets, with measures of how strong and how frequent the association is.</dd>
+        <dt>Here</dt><dd>SKUs frequently picked on the same order, which feeds slotting; alarm codes that tend to precede a particular failure.</dd>
+        <dt>Watch for</dt><dd>Co-occurrence can reflect a shared cause rather than a relationship worth acting on, and sheer volume will make popular items appear associated with nearly everything.</dd>
+      </dl>
+    </article>
+
+    <article class="card" data-fam="unsupervised">
+      <div class="card-h"><span class="lvl lvl-d">Composite indices</span><span class="fn">Unsupervised</span></div>
+      <h3>Dimensionality reduction</h3>
+      <p class="prob">Condenses many correlated measurements into a few composite figures
+      that retain most of the variation in the original set.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>Can these forty sensor channels be summarized into something a person can monitor?</dd>
+        <dt>Needs</dt><dd>Many numeric attributes measured consistently across records.</dd>
+        <dt>Returns</dt><dd>A small number of derived indices, with a description of what each one captures.</dd>
+        <dt>Here</dt><dd>A health index per refrigeration asset built from many telemetry channels; condensing a wide activity profile before clustering it.</dd>
+        <dt>Watch for</dt><dd>The derived indices are combinations of the originals, and their interpretation is not always obvious. This is more often a preparation step than a deliverable in itself.</dd>
+      </dl>
+    </article>
+
+  </div>
+
+  <h2 id="p-prescriptive">Prescriptive: choosing an action</h2>
+
+  <p>Prediction estimates what will happen. These methods take the further step of
+  recommending what to do about it, given the constraints the operation actually works
+  under.</p>
+
+  <div class="cards">
+
+    <article class="card" data-fam="prescriptive">
+      <div class="card-h"><span class="lvl lvl-x">A plan</span><span class="fn">Prescriptive</span></div>
+      <h3>Optimization</h3>
+      <p class="prob">Searches for the best available plan subject to stated constraints,
+      in situations where the number of possible plans is far too large to evaluate by
+      hand.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>Given our costs, capacity, and rules, what is the best assignment or schedule?</dd>
+        <dt>Needs</dt><dd>Constraints written down explicitly, an objective people agree on, and reliable input data.</dd>
+        <dt>Returns</dt><dd>A specific recommended plan, usually with the cost difference against the current one.</dd>
+        <dt>Here</dt><dd>Door and appointment assignment; load building and routing; a re-slotting move list.</dd>
+        <dt>Watch for</dt><dd>Writing down the constraints is normally the hard part. Rules that are followed on the floor but never documented will be violated by the solver, and the recommendation will be dismissed for good reason.</dd>
+      </dl>
+    </article>
+
+    <article class="card" data-fam="prescriptive">
+      <div class="card-h"><span class="lvl lvl-x">Scenario outcomes</span><span class="fn">Prescriptive</span></div>
+      <h3>Simulation</h3>
+      <p class="prob">Represents the operation as a system and runs it many times under
+      varied conditions, so that a proposed change can be examined before it is committed
+      to.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>What would happen if we changed this? How bad is the worst plausible case?</dd>
+        <dt>Needs</dt><dd>A description of the process, distributions for the variable parts, and historical data to calibrate against.</dd>
+        <dt>Returns</dt><dd>A distribution of outcomes per scenario rather than a single figure.</dd>
+        <dt>Here</dt><dd>The effect on dwell of adding two doors or changing the appointment grid; staffing needed to absorb a seasonal peak.</dd>
+        <dt>Watch for</dt><dd>A simulation is only as good as its assumptions and will produce plausible-looking output whether or not they hold. Reproducing a period that already happened is the usual check.</dd>
+      </dl>
+    </article>
+
+  </div>
+
+  <h2 id="p-causal">Causal: attributing a change</h2>
+
+  <p>Prediction and causation are different questions, and a method that is good at one is
+  not automatically good at the other. A model can forecast overtime accurately from
+  variables that do not cause it. When the question is whether something worked, the
+  analysis has to be designed for that from the start.</p>
+
+  <div class="cards">
+
+    <article class="card" data-fam="causal">
+      <div class="card-h"><span class="lvl lvl-p">Effect estimate</span><span class="fn">Causal</span></div>
+      <h3>Causal inference and experiment design</h3>
+      <p class="prob">Estimates the effect of a change, separated from everything else that
+      moved at the same time. Where a controlled comparison can be arranged in advance that
+      is the stronger option; where it cannot, several methods approximate one after the
+      fact.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>Did this change cause the improvement, and how large was the effect?</dd>
+        <dt>Needs</dt><dd>Some basis for comparison, such as sites, shifts, or periods that did not receive the change, along with measurements from before and after.</dd>
+        <dt>Returns</dt><dd>An estimated effect size with an interval, and an explicit statement of the assumptions it rests on.</dd>
+        <dt>Here</dt><dd>Whether a revised pick path raised cases per hour or whether volume mix explains it; whether a rate change affected volume.</dd>
+        <dt>Watch for</dt><dd>Before-and-after comparisons with no control group are the most common way a modest effect gets reported as a large one. Deciding how the comparison will be made before a change is rolled out costs very little and improves the answer considerably.</dd>
+      </dl>
+    </article>
+
+  </div>
+
+  <h2 id="p-text">Unstructured: working with text</h2>
+
+  <div class="cards">
+
+    <article class="card" data-fam="text">
+      <div class="card-h"><span class="lvl lvl-d">Structured fields</span><span class="fn">Text</span></div>
+      <h3>Text mining and extraction</h3>
+      <p class="prob">Turns free-text records into fields that can be counted, grouped, and
+      joined to other data.</p>
+      <dl class="kv">
+        <dt>Answers</dt><dd>What are people actually recording in these notes, and how often?</dd>
+        <dt>Needs</dt><dd>A body of text records, and agreement on which categories or fields would be useful.</dd>
+        <dt>Returns</dt><dd>Categories, extracted values, or summaries attached to each record.</dd>
+        <dt>Here</dt><dd>Categorizing claims and complaints by cause; pulling equipment and fault details out of maintenance notes.</dd>
+        <dt>Watch for</dt><dd>Free text tends to be inconsistent, abbreviated, and specific to a site or a person. Some manual labeling is nearly always needed to set the categories and check the output, and text on its own rarely settles a question without structured data alongside it.</dd>
+      </dl>
+    </article>
+
+  </div>
+
+  <hr>
+
+  <h2 id="p-start">Where to start</h2>
+
+  <p>You do not need to identify the type before contacting us. Requests that arrive
+  described as one type frequently turn out to be another, and some are answered
+  adequately by a report or a query. Describing the decision, as covered in
+  <a href="#engage">section 06</a>, is enough to begin with.</p>
+
+  <p><a href="#usecases">Section 05</a> gives fifteen examples from our operations, each
+  labeled with the problem type it belongs to and filterable by type as well as by
+  function.</p>
+</section>
+
+<!-- ═════════════════════════ 05 · USE CASES ═════════════════════════ -->
+<section class="mdoc wide" id="usecases" data-title="Examples from our operations" hidden>
+  <div class="eyebrow"><span class="num">05</span><span>Applied</span><span class="tag">15 examples</span></div>
+  <h1>Examples from our operations</h1>
+
+  <p><em>Fifteen examples of the problem types described in section 04, applied to work
+  that goes on in our buildings. Each gives the situation, the problem type, the data it
+  draws on, the method, and the output.</em></p>
+
+  <div class="filterrow">
+    <span class="filterlab">Function</span>
+    <div class="filters" data-axis="cat" role="group" aria-label="Filter examples by function">
+      <button class="chip on" data-filter="all" aria-pressed="true">All <span class="ct">15</span></button>
+      <button class="chip" data-filter="ops" aria-pressed="false">Warehouse ops</button>
+      <button class="chip" data-filter="labor" aria-pressed="false">Labor</button>
+      <button class="chip" data-filter="transport" aria-pressed="false">Transportation</button>
+      <button class="chip" data-filter="energy" aria-pressed="false">Energy</button>
+      <button class="chip" data-filter="inventory" aria-pressed="false">Inventory &amp; quality</button>
+      <button class="chip" data-filter="commercial" aria-pressed="false">Commercial &amp; finance</button>
+    </div>
+  </div>
+
+  <div class="filterrow">
+    <span class="filterlab">Problem type</span>
+    <div class="filters" data-axis="type" role="group" aria-label="Filter examples by problem type">
+      <button class="chip on" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" data-filter="forecasting" aria-pressed="false">Forecasting</button>
+      <button class="chip" data-filter="regression" aria-pressed="false">Regression</button>
+      <button class="chip" data-filter="classification" aria-pressed="false">Classification</button>
+      <button class="chip" data-filter="survival" aria-pressed="false">Time-to-event</button>
+      <button class="chip" data-filter="ranking" aria-pressed="false">Ranking</button>
+      <button class="chip" data-filter="anomaly" aria-pressed="false">Anomaly detection</button>
+      <button class="chip" data-filter="optimization" aria-pressed="false">Optimization</button>
+    </div>
   </div>
 
   <div class="cards" id="cards">
 
     <!-- OPS -->
-    <article class="card" data-cat="ops labor">
+    <article class="card" data-cat="ops labor" data-type="forecasting">
       <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Warehouse ops</span></div>
-      <h3>Inbound &amp; outbound volume forecasting</h3>
-      <p class="prob">Shift plans are built on last week's actuals and a phone call. When a customer's
-      promotion or a seasonal pack runs hot, the floor finds out at the guard shack.</p>
+      <h3>Inbound and outbound volume forecasting</h3>
+      <p class="prob">Shift plans are typically built from recent actuals and whatever the
+      customer has told us. When a promotion or a seasonal pack runs heavier than expected,
+      the site often learns about it as the trucks arrive, which leaves little room to
+      adjust staffing.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Time-series forecasting</dd>
         <dt>Data</dt><dd>WMS receipt and order history, appointment schedule, customer forecasts, calendar and seasonality, promotional and holiday flags</dd>
-        <dt>Approach</dt><dd>Time-series forecasting per site and customer, with prediction intervals and a bottom-up roll-up to the network</dd>
+        <dt>Approach</dt><dd>Forecasting per site and customer, with prediction intervals and a bottom-up roll-up to the network</dd>
         <dt>Output</dt><dd>A fourteen-day pallet and case forecast by site, refreshed daily, flagging days expected to exceed comfortable capacity</dd>
       </dl>
     </article>
 
-    <article class="card" data-cat="ops">
+    <article class="card" data-cat="ops" data-type="optimization">
       <div class="card-h"><span class="lvl lvl-x">Prescriptive</span><span class="fn">Warehouse ops</span></div>
-      <h3>Slotting &amp; storage optimization</h3>
-      <p class="prob">Fast movers end up at the back of the freezer, selectors walk further than they
-      should, and re-slotting happens only once someone notices it has gotten bad.</p>
+      <h3>Slotting and storage optimization</h3>
+      <p class="prob">Slot assignments drift out of date as SKU velocity changes. Fast
+      movers end up in locations that add travel to every pick, and re-slotting tends to
+      happen in response to a noticeable problem rather than on a schedule.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Optimization, informed by affinity analysis</dd>
         <dt>Data</dt><dd>Pick history by SKU, location master and travel distances, pallet dimensions and weight, temperature zone constraints, lot and expiry rules</dd>
         <dt>Approach</dt><dd>Velocity and affinity analysis feeding a constrained optimization that respects zone, stacking, and FEFO rules</dd>
         <dt>Output</dt><dd>A ranked weekly re-slotting worklist sized to what a shift can absorb, with estimated travel saved per move</dd>
       </dl>
     </article>
 
-    <article class="card" data-cat="ops transport">
+    <article class="card" data-cat="ops transport" data-type="regression optimization">
       <div class="card-h"><span class="lvl lvl-x">Prescriptive</span><span class="fn">Warehouse ops</span></div>
-      <h3>Dock scheduling &amp; trailer dwell</h3>
-      <p class="prob">Appointments cluster in the morning, doors sit idle in the afternoon, and detention
-      charges follow. Nobody sees the whole day's shape until it is already happening.</p>
+      <h3>Dock scheduling and trailer dwell</h3>
+      <p class="prob">Appointments cluster into the morning while doors sit idle later in
+      the day. Dwell and detention costs follow from the resulting congestion, and the
+      shape of the day is difficult to see until it is already underway.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Regression to predict service time, then optimization to build the schedule</dd>
         <dt>Data</dt><dd>Appointment and gate timestamps, door assignment history, unload and load durations by load type, yard moves, labor availability</dd>
         <dt>Approach</dt><dd>Predicted service time per load feeding a scheduling optimizer that levels arrivals across doors and hours</dd>
         <dt>Output</dt><dd>A recommended appointment grid and door plan, plus same-day alerts when the schedule drifts toward a bottleneck</dd>
@@ -434,278 +790,336 @@
     </article>
 
     <!-- LABOR -->
-    <article class="card" data-cat="labor">
+    <article class="card" data-cat="labor" data-type="forecasting">
       <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Labor</span></div>
-      <h3>Labor demand planning &amp; overtime control</h3>
-      <p class="prob">Staffing decisions are made days ahead, but volume lands hourly. The gap is absorbed
-      by overtime on heavy days and idle time on light ones.</p>
+      <h3>Labor demand planning</h3>
+      <p class="prob">Staffing is committed days in advance while volume arrives hour by
+      hour. The difference between the two is absorbed through overtime when volume runs
+      high and idle time when it runs low.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Time-series forecasting, converted to hours by activity</dd>
         <dt>Data</dt><dd>Volume forecast, labor standards by activity, timeclock and attendance history, shift patterns, training and certification records</dd>
         <dt>Approach</dt><dd>Convert forecast workload into required hours by function and hour of day, then match against the available roster</dd>
-        <dt>Output</dt><dd>A staffing recommendation by shift and function, showing projected overtime and understaffing risk side by side</dd>
+        <dt>Output</dt><dd>A staffing recommendation by shift and function, showing projected overtime and understaffing risk together</dd>
       </dl>
     </article>
 
-    <article class="card" data-cat="labor">
+    <article class="card" data-cat="labor" data-type="survival">
       <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Labor</span></div>
-      <h3>Turnover &amp; retention risk</h3>
-      <p class="prob">Freezer environments are demanding, and losing a trained selector costs far more than
-      the open shift it creates. HR usually learns about a resignation after the decision is made.</p>
+      <h3>Turnover and retention analysis</h3>
+      <p class="prob">Freezer work is physically demanding and turnover is costly, since a
+      trained selector takes time to replace. Notice of a departure generally arrives after
+      the decision has already been made.</p>
       <dl class="kv">
-        <dt>Data</dt><dd>Tenure, shift and schedule stability, overtime load, absence patterns, pay progression, site and role — aggregated and privacy-reviewed</dd>
-        <dt>Approach</dt><dd>Cohort survival analysis and classification models identifying which conditions precede voluntary departures</dd>
-        <dt>Output</dt><dd>Site-level drivers of turnover ranked by impact, so intervention targets scheduling and workload rather than guesswork</dd>
+        <dt>Problem type</dt><dd>Time-to-event</dd>
+        <dt>Data</dt><dd>Tenure, shift and schedule stability, overtime load, absence patterns, pay progression, site and role, aggregated and privacy-reviewed</dd>
+        <dt>Approach</dt><dd>Cohort survival analysis identifying which conditions precede voluntary departures</dd>
+        <dt>Output</dt><dd>Site-level drivers of turnover ranked by estimated impact, so that intervention can target scheduling and workload</dd>
       </dl>
     </article>
 
     <!-- TRANSPORT -->
-    <article class="card" data-cat="transport">
+    <article class="card" data-cat="transport" data-type="optimization">
       <div class="card-h"><span class="lvl lvl-x">Prescriptive</span><span class="fn">Transportation</span></div>
-      <h3>Route, mode &amp; consolidation planning</h3>
-      <p class="prob">LTL shipments leave on separate trucks to neighboring destinations because the
-      consolidation opportunity wasn't visible when the load was tendered.</p>
+      <h3>Route, mode and consolidation planning</h3>
+      <p class="prob">Shipments to nearby destinations sometimes move on separate trucks
+      because the opportunity to combine them was not visible at the moment each one was
+      tendered.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Optimization</dd>
         <dt>Data</dt><dd>TMS order and shipment history, lane rates and accessorials, carrier performance, delivery windows, equipment and temperature requirements</dd>
         <dt>Approach</dt><dd>Load-building and vehicle-routing optimization with temperature compatibility and appointment windows as hard constraints</dd>
-        <dt>Output</dt><dd>Suggested consolidations and mode changes with an estimated cost delta per option, surfaced before tender</dd>
+        <dt>Output</dt><dd>Suggested consolidations and mode changes with an estimated cost difference per option, surfaced before tender</dd>
       </dl>
     </article>
 
-    <article class="card" data-cat="transport ops">
+    <article class="card" data-cat="transport ops" data-type="classification regression">
       <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Transportation</span></div>
-      <h3>Arrival-time &amp; on-time delivery prediction</h3>
-      <p class="prob">A carrier says they'll be there at eight. The site plans for eight. Reality is a
-      distribution, not a promise, and the schedule absorbs the difference.</p>
+      <h3>Arrival-time and on-time delivery prediction</h3>
+      <p class="prob">Carrier ETAs are treated as fixed points when planning the day,
+      though actual arrival times vary considerably by lane, carrier, and time of year.
+      That variation is absorbed by the door schedule.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Classification for the on-time question, regression for the arrival window</dd>
         <dt>Data</dt><dd>Historical gate-in and gate-out times, carrier and lane performance, distance and traffic patterns, weather, load type</dd>
-        <dt>Approach</dt><dd>Regression and classification models producing a probability-weighted arrival window per load</dd>
-        <dt>Output</dt><dd>A live risk board of loads unlikely to make their window, early enough to reshuffle doors or notify the customer</dd>
+        <dt>Approach</dt><dd>Models producing a probability-weighted arrival window per load</dd>
+        <dt>Output</dt><dd>A live view of loads unlikely to make their window, early enough to reshuffle doors or notify the customer</dd>
       </dl>
     </article>
 
     <!-- ENERGY -->
-    <article class="card" data-cat="energy">
+    <article class="card" data-cat="energy" data-type="forecasting optimization">
       <div class="card-h"><span class="lvl lvl-x">Prescriptive</span><span class="fn">Energy</span></div>
-      <h3>Refrigeration energy &amp; peak demand</h3>
-      <p class="prob">Refrigeration is one of the largest controllable costs in the building, and demand
-      charges are set by a handful of peak intervals nobody saw coming.</p>
+      <h3>Refrigeration energy and peak demand</h3>
+      <p class="prob">Refrigeration is among the larger controllable costs in a building.
+      Demand charges are driven by a small number of peak intervals, which are difficult to
+      anticipate without modeling consumption directly.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Forecasting, then optimization within temperature limits</dd>
         <dt>Data</dt><dd>Interval meter data, utility tariff structure, compressor and setpoint logs, room temperatures, ambient weather, door-open events, product load</dd>
         <dt>Approach</dt><dd>Consumption modeling plus optimization of pre-cooling and load-shifting within safe temperature bands</dd>
         <dt>Output</dt><dd>Day-ahead load-shift recommendations, peak-risk alerts, and site benchmarking normalized for weather and occupancy</dd>
       </dl>
     </article>
 
-    <article class="card" data-cat="energy ops">
+    <article class="card" data-cat="energy ops" data-type="anomaly">
       <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Maintenance</span></div>
-      <h3>Predictive maintenance for critical assets</h3>
-      <p class="prob">A compressor or dock leveler fails mid-shift. The repair is the small cost; the
-      product at risk and the disrupted schedule are the large ones.</p>
+      <h3>Condition monitoring for critical assets</h3>
+      <p class="prob">Equipment failures during a shift carry costs beyond the repair
+      itself, including product at risk and disruption to the schedule. Most of these
+      assets are instrumented, and readings in the period before a failure often differ
+      from normal operation.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Anomaly detection, with time-to-event where failure history is complete enough</dd>
         <dt>Data</dt><dd>Equipment telemetry and alarm history, run hours, work orders and parts usage, ambient conditions, asset age and make</dd>
-        <dt>Approach</dt><dd>Anomaly detection on sensor patterns and failure-probability models scored on a rolling window</dd>
-        <dt>Output</dt><dd>A prioritized maintenance queue flagging assets drifting out of their own normal behavior before they trip an alarm</dd>
+        <dt>Approach</dt><dd>Anomaly detection on sensor patterns, scored on a rolling window</dd>
+        <dt>Output</dt><dd>A prioritized maintenance queue flagging assets drifting away from their own normal behavior</dd>
       </dl>
     </article>
 
     <!-- INVENTORY -->
-    <article class="card" data-cat="inventory">
+    <article class="card" data-cat="inventory" data-type="anomaly ranking">
       <div class="card-h"><span class="lvl lvl-d">Diagnostic</span><span class="fn">Inventory</span></div>
-      <h3>Inventory accuracy &amp; shrink detection</h3>
-      <p class="prob">Cycle counts catch discrepancies late, and root cause is reconstructed from memory
-      weeks after the transaction that caused it.</p>
+      <h3>Inventory accuracy and shrink detection</h3>
+      <p class="prob">Cycle counting on a fixed rotation finds discrepancies some time
+      after they occur, by which point reconstructing the cause from transaction history is
+      difficult.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Anomaly detection, then ranking</dd>
         <dt>Data</dt><dd>Transaction-level WMS movements, adjustment history, cycle count results, license plate and pallet genealogy, catch-weight variances</dd>
-        <dt>Approach</dt><dd>Anomaly detection across transaction patterns, with counting effort targeted where error probability is highest</dd>
-        <dt>Output</dt><dd>A risk-ranked cycle count list instead of a round-robin, plus early flags on locations and processes generating variance</dd>
+        <dt>Approach</dt><dd>Anomaly detection across transaction patterns, with counting effort directed where error probability is highest</dd>
+        <dt>Output</dt><dd>A risk-ranked cycle count list in place of a fixed rotation, plus early flags on locations and processes generating variance</dd>
       </dl>
     </article>
 
-    <article class="card" data-cat="inventory">
+    <article class="card" data-cat="inventory" data-type="anomaly">
       <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Quality &amp; food safety</span></div>
-      <h3>Temperature excursion &amp; shelf-life risk</h3>
-      <p class="prob">Excursions are reviewed after the fact. By the time a report surfaces the event, the
-      product has moved and the customer conversation is reactive.</p>
+      <h3>Temperature excursion and shelf-life risk</h3>
+      <p class="prob">Excursions are generally reviewed after the fact. By the time the
+      event appears in a report the product has often moved, and the conversation with the
+      customer becomes a reactive one.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Anomaly detection on sensor series</dd>
         <dt>Data</dt><dd>Room and trailer temperature telemetry, door-open events, receipt and ship timestamps, product tolerance specs, lot and expiry data</dd>
-        <dt>Approach</dt><dd>Streaming anomaly detection on temperature curves, combined with cumulative time-temperature exposure scoring by lot</dd>
-        <dt>Output</dt><dd>Real-time excursion alerts routed to the right person, and a lot-level risk view supporting FEFO and traceability decisions</dd>
+        <dt>Approach</dt><dd>Anomaly detection on temperature curves, combined with cumulative time-temperature exposure scoring by lot</dd>
+        <dt>Output</dt><dd>Excursion alerts routed to the right person, and a lot-level risk view supporting FEFO and traceability decisions</dd>
       </dl>
     </article>
 
-    <article class="card" data-cat="inventory commercial">
+    <article class="card" data-cat="inventory commercial" data-type="forecasting">
       <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Space planning</span></div>
-      <h3>Space &amp; capacity planning</h3>
-      <p class="prob">Occupancy is managed to a monthly number, but the crunch happens on specific weeks —
-      and overselling space is far more expensive than knowing about it early.</p>
+      <h3>Space and capacity planning</h3>
+      <p class="prob">Occupancy tends to be managed against a monthly figure while the
+      constraint actually binds in particular weeks. Committing space that will not be
+      available is considerably more expensive than knowing about the conflict early.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Time-series forecasting, with scenario simulation</dd>
         <dt>Data</dt><dd>Pallet position inventory over time, contracted versus actual usage by customer, inbound forecast, dwell-time distributions by SKU</dd>
-        <dt>Approach</dt><dd>Forecast in-and-out flows to project occupancy forward, with simulation of customer-mix scenarios</dd>
-        <dt>Output</dt><dd>A projected occupancy curve by site with at-risk weeks highlighted, giving sales and ops time to place volume elsewhere</dd>
+        <dt>Approach</dt><dd>Forecast inbound and outbound flows to project occupancy forward, with simulation of customer-mix scenarios</dd>
+        <dt>Output</dt><dd>A projected occupancy curve by site with at-risk weeks highlighted, giving sales and operations time to place volume elsewhere</dd>
       </dl>
     </article>
 
     <!-- COMMERCIAL -->
-    <article class="card" data-cat="commercial">
+    <article class="card" data-cat="commercial" data-type="regression">
       <div class="card-h"><span class="lvl lvl-d">Diagnostic</span><span class="fn">Finance</span></div>
-      <h3>Customer &amp; SKU profitability</h3>
-      <p class="prob">Revenue is visible per customer; true cost to serve is not. Handling-heavy,
-      low-storage accounts can look identical to their opposite on a P&amp;L summary.</p>
+      <h3>Customer and SKU profitability</h3>
+      <p class="prob">Revenue by customer is visible directly; cost to serve is not,
+      because it depends on the mix of activities an account generates. Two accounts with
+      similar storage volumes can place very different demands on labor and dock
+      capacity.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Regression, applied to activity-based costing</dd>
         <dt>Data</dt><dd>Billing and rate tables, activity-level transactions (receipts, picks, loads, blast, VAS), labor minutes by activity, space occupied over time</dd>
         <dt>Approach</dt><dd>Activity-based costing driven by measured effort, then margin decomposition by customer, site, and SKU profile</dd>
-        <dt>Output</dt><dd>A margin waterfall per account showing which activities consume it — the evidence base for renewal and rate conversations</dd>
+        <dt>Output</dt><dd>A margin breakdown per account showing which activities consume it, as an evidence base for renewal and rate conversations</dd>
       </dl>
     </article>
 
-    <article class="card" data-cat="commercial">
+    <article class="card" data-cat="commercial" data-type="classification">
       <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Commercial</span></div>
-      <h3>Churn &amp; volume-decline early warning</h3>
-      <p class="prob">Accounts rarely leave suddenly. Volume tapers, order patterns change, and the signals
-      are spread across months of transactions nobody reads end to end.</p>
+      <h3>Volume-decline early warning</h3>
+      <p class="prob">Accounts that leave usually decline gradually first, through falling
+      volume and changing order patterns. Those signals are spread across months of
+      transactions and are not obvious in a monthly summary.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Classification, with change-point detection</dd>
         <dt>Data</dt><dd>Volume and order-frequency trends, service performance history, claims and complaints, contract terms and renewal dates</dd>
-        <dt>Approach</dt><dd>Change-point detection on account trajectories plus a classification model for attrition risk</dd>
-        <dt>Output</dt><dd>A monthly watch list for account managers ordered by revenue at risk, with the specific signals that triggered each flag</dd>
+        <dt>Approach</dt><dd>Change-point detection on account trajectories combined with a classification model for attrition risk</dd>
+        <dt>Output</dt><dd>A monthly watch list for account managers ordered by revenue at risk, with the signals that triggered each flag</dd>
       </dl>
     </article>
 
-    <article class="card" data-cat="commercial">
-      <div class="card-h"><span class="lvl lvl-x">Prescriptive</span><span class="fn">Pricing</span></div>
-      <h3>Quote &amp; rate decision support</h3>
-      <p class="prob">New business is priced from comparable deals and instinct. Two accounts with similar
-      pallet counts can impose very different demands on the building.</p>
+    <article class="card" data-cat="commercial" data-type="regression">
+      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Pricing</span></div>
+      <h3>Quote and rate decision support</h3>
+      <p class="prob">New business is often priced against comparable accounts. Pallet
+      counts alone are a weak guide to what an account will cost to serve, since handling
+      intensity and seasonality vary widely between accounts with similar storage
+      footprints.</p>
       <dl class="kv">
+        <dt>Problem type</dt><dd>Regression</dd>
         <dt>Data</dt><dd>Historical quotes and outcomes, realized cost to serve by account profile, site capacity and constraints, seasonality of the incoming volume</dd>
         <dt>Approach</dt><dd>Predicted cost to serve for the proposed profile, combined with margin scenarios across a rate range</dd>
-        <dt>Output</dt><dd>A pre-quote profitability estimate with sensitivity to volume and mix assumptions, produced in minutes rather than days</dd>
+        <dt>Output</dt><dd>A pre-quote profitability estimate with sensitivity to volume and mix assumptions</dd>
       </dl>
     </article>
 
   </div>
 
-  <p class="nohit" id="cards-empty" hidden>No use cases in this category yet.</p>
+  <p class="nohit" id="cards-empty" hidden>No examples match that combination of filters.</p>
 
   <hr>
 
-  <p class="aside">These describe problem types the discipline handles well in this industry. They are
-  illustrative, not published results — no throughput, savings, or accuracy figures are claimed. Any
-  project touching employee or customer data goes through privacy, security, and food-safety governance
-  review before it starts.</p>
+  <p class="aside">These describe problem types that suit the industry, not projects with
+  published results. No throughput, savings, or accuracy figures are claimed for any of
+  them. Any project involving employee or customer data goes through privacy, security,
+  and food-safety governance review before work begins.</p>
 </section>
 
-<!-- ═════════════════════════ 05 · ENGAGE ═════════════════════════ -->
+<!-- ═════════════════════════ 06 · ENGAGE ═════════════════════════ -->
 <section class="mdoc" id="engage" data-title="Bringing us a problem" hidden>
-  <div class="eyebrow"><span class="num">05</span><span>Working together</span><span class="tag">Process</span></div>
+  <div class="eyebrow"><span class="num">06</span><span>Working together</span><span class="tag">Process</span></div>
   <h1>Bringing us a problem</h1>
 
-  <p><em>You do not need to know what model to use, or whether the data exists. You need to know what
-  decision is hard. Bring the problem in this shape and we can usually tell you within a week whether it
-  is tractable.</em></p>
+  <p><em>Working out which method applies is our job. What we need from you is an account
+  of the decision and what makes it difficult. Given that, we can usually say within a week
+  or so whether the problem is tractable.</em></p>
 
   <h2 id="e-statement">A good problem statement</h2>
 
   <dl class="kv kv-loose">
-    <dt>The decision</dt><dd>What is being decided, by whom, and how often?</dd>
-    <dt>Today's method</dt><dd>How is it decided now — a report, experience, a spreadsheet someone maintains?</dd>
-    <dt>Cost of being wrong</dt><dd>What happens when the current approach misses? Overtime, detention, spoilage, a lost account?</dd>
-    <dt>Timing</dt><dd>When would the answer need to arrive to be useful? An accurate forecast that lands after the schedule is published is worth nothing.</dd>
-    <dt>Available data</dt><dd>Which systems touch this process? A rough list is enough — we will do the archaeology.</dd>
-    <dt>Success</dt><dd>What would you expect to see change if this worked?</dd>
+    <dt>The decision</dt><dd>What is being decided, by whom, and how often it comes up.</dd>
+    <dt>Today's method</dt><dd>How it is decided now: a report, experience, a spreadsheet someone maintains.</dd>
+    <dt>Cost of being wrong</dt><dd>What the consequences are when the current approach misses. Overtime, detention, spoilage, a lost account.</dd>
+    <dt>Timing</dt><dd>When the answer would need to arrive to be usable. A forecast that lands after the schedule is published cannot be acted on.</dd>
+    <dt>Available data</dt><dd>Which systems are involved in the process. A rough list is enough; tracking down the detail is part of our work.</dd>
+    <dt>Success</dt><dd>What you would expect to see change if it worked.</dd>
   </dl>
 
   <hr>
 
   <h2 id="e-fit">What makes a good candidate</h2>
 
+  <p>Some problems suit this kind of work better than others. The distinction is mostly
+  about whether there is a record to learn from and a decision that can absorb the
+  answer.</p>
+
   <div class="twoup">
     <div class="panel panel-a">
       <h4>Ready</h4>
       <ul class="tick">
-        <li>The decision repeats — daily, weekly, per load, per SKU.</li>
-        <li>The outcome is recorded somewhere, so we can learn from history.</li>
-        <li>Several factors interact, which is why a single report hasn't solved it.</li>
-        <li>Someone owns the decision and is willing to change how they make it.</li>
+        <li>The decision recurs: daily, weekly, per load, per SKU.</li>
+        <li>The outcome is recorded somewhere, so there is history to learn from.</li>
+        <li>Several factors interact, which is usually why a report has not settled it.</li>
+        <li>Someone owns the decision and is prepared to change how they make it.</li>
       </ul>
     </div>
     <div class="panel panel-b">
       <h4>Not yet</h4>
       <ul class="cross">
-        <li>The underlying process isn't documented, or varies by site with no record of the difference.</li>
-        <li>The data is captured on paper or in free-text notes only.</li>
-        <li>It's a one-time question — a good analysis answers it faster than a model would.</li>
-        <li>The real blocker is a policy or system change, not a lack of insight.</li>
+        <li>The process is undocumented, or varies between sites with no record of the differences.</li>
+        <li>The relevant data exists only on paper or in free-text notes.</li>
+        <li>The question is one-off. A direct analysis will answer it sooner than a model would.</li>
+        <li>The obstacle is a policy or system constraint rather than a lack of information.</li>
       </ul>
     </div>
   </div>
 
-  <p>“Not yet” is not a rejection. Several of the items above are themselves small projects, and the work
-  to fix them tends to pay for itself before any model is built.</p>
+  <p>Items in the second column are not refusals. Several of them describe work we can help
+  with directly, and the data capture and documentation involved often has value
+  independent of whatever gets built afterwards.</p>
 
   <h2 id="e-after">What happens after intake</h2>
 
   <div class="tablewrap">
   <table>
-    <thead><tr><th>When</th><th>What we do</th><th>What you get</th></tr></thead>
+    <thead><tr><th>When</th><th>What we do</th><th>What comes back</th></tr></thead>
     <tbody>
-      <tr><td>Week 0</td><td>Intake conversation</td><td>Your problem restated as a decision, and an honest view of whether it is worth solving</td></tr>
-      <tr><td>Weeks 1–2</td><td>Feasibility check</td><td>A go / no-go on data availability and signal, with the reasoning shown</td></tr>
+      <tr><td>Week 0</td><td>Intake conversation</td><td>The problem restated as a decision, and a view on whether it is worth pursuing</td></tr>
+      <tr><td>Weeks 1–2</td><td>Feasibility check</td><td>A go or no-go on data availability and signal, with the reasoning shown</td></tr>
       <tr><td>Weeks 3–8</td><td>Prototype</td><td>A working model reviewed with you and tested against history</td></tr>
-      <tr><td>Ongoing</td><td>Pilot, then production</td><td>One site live, then rollout where results hold up, with monitoring in place</td></tr>
+      <tr><td>Ongoing</td><td>Pilot, then production</td><td>One site live, then extension where results hold, with monitoring in place</td></tr>
     </tbody>
   </table>
   </div>
 
-  <blockquote>
-    <p>The first conversation costs nothing but half an hour, and the answer is sometimes
-    <em>“here's a report that solves this today.”</em> That still counts as a good outcome.</p>
-  </blockquote>
+  <p>An initial conversation takes about half an hour and does not commit anyone to a
+  project. A reasonable share of them end with a report or an existing query that answers
+  the question well enough.</p>
 </section>
 
-<!-- ═════════════════════════ 06 · GLOSSARY ═════════════════════════ -->
-<section class="mdoc" id="glossary" data-title="Plain-language glossary" hidden>
-  <div class="eyebrow"><span class="num">06</span><span>Reference</span><span class="tag">Ref</span></div>
-  <h1>Plain-language glossary</h1>
+<!-- ═════════════════════════ 07 · GLOSSARY ═════════════════════════ -->
+<section class="mdoc" id="glossary" data-title="Glossary" hidden>
+  <div class="eyebrow"><span class="num">07</span><span>Reference</span><span class="tag">Ref</span></div>
+  <h1>Glossary</h1>
 
-  <p><em>The vocabulary you will hear in a project kickoff, without the jargon tax.</em></p>
+  <p><em>Terms that come up in a project kickoff, in plain language.</em></p>
 
   <div class="gloss">
     <details><summary>Model</summary>
-      <p>A rule learned from historical data that turns inputs into an output — for example, turning
-      “customer, day of week, season, appointment count” into “expected pallets received.”</p></details>
+      <p>A rule fitted to historical data that turns inputs into an output. For example,
+      taking customer, day of week, season, and appointment count, and returning an
+      expected number of pallets received.</p></details>
     <details><summary>Feature</summary>
-      <p>An input to a model. Day of week, ambient temperature, SKU velocity, and customer tenure are all
-      features. Choosing good features is where domain knowledge pays off most.</p></details>
-    <details><summary>Training &amp; validation</summary>
-      <p>Training is the model learning from past data. Validation is testing it on data it never saw, to
-      estimate how it will perform on next week's real decisions rather than on the past it memorized.</p></details>
+      <p>An input to a model. Day of week, ambient temperature, SKU velocity, and customer
+      tenure are all features. Deciding which ones to include draws heavily on knowledge of
+      the operation.</p></details>
+    <details><summary>Label, or target</summary>
+      <p>The value a supervised model is trained to reproduce, meaning the recorded answer.
+      Whether a usable label exists in the historical data usually determines whether a
+      supervised approach is possible at all.</p></details>
+    <details><summary>Supervised and unsupervised learning</summary>
+      <p>Supervised methods learn from examples where the outcome was recorded.
+      Unsupervised methods describe structure in data with no recorded outcome, such as
+      groupings or unusual observations. The distinction determines what data a project
+      needs before it can start.</p></details>
+    <details><summary>Training and validation</summary>
+      <p>Training is fitting the model to past data. Validation is measuring its
+      performance on data held back from that process, which gives a more realistic
+      estimate of how it will behave on decisions that have not been made yet.</p></details>
     <details><summary>Machine learning</summary>
-      <p>A family of methods that learn patterns from data instead of being programmed with explicit
-      rules. It is a subset of data science, not a synonym for it.</p></details>
+      <p>A set of methods that fit patterns from data rather than following rules written
+      by hand. It is one part of data science rather than another name for it.</p></details>
     <details><summary>Prediction interval</summary>
-      <p>The honest range around a forecast. “1,240 pallets” is a guess; “most likely 1,240, and ninety
-      percent of the time between 1,050 and 1,480” is a plan you can staff to.</p></details>
+      <p>The range around a forecast. A point estimate of 1,240 pallets says less than an
+      estimate of 1,240 with a range of roughly 1,050 to 1,480, which indicates how much
+      slack a plan needs.</p></details>
+    <details><summary>Constraint</summary>
+      <p>A rule an optimization result has to respect: door capacity, carrier windows,
+      temperature compatibility, stacking limits. Constraints that are followed in practice
+      but never written down are a common reason a recommendation looks wrong to the people
+      receiving it.</p></details>
     <details><summary>Optimization</summary>
-      <p>Finding the best option under constraints — the lowest-cost load plan that still honors delivery
-      windows, temperature requirements, and equipment limits.</p></details>
+      <p>Selecting the best option available under a set of constraints, such as the
+      lowest-cost load plan that still meets delivery windows, temperature requirements,
+      and equipment limits.</p></details>
     <details><summary>Anomaly detection</summary>
-      <p>Learning what “normal” looks like so unusual behavior — a compressor drawing more power than its
-      own history predicts — surfaces automatically rather than waiting for a threshold alarm.</p></details>
+      <p>Establishing what normal behavior looks like for a process or asset, so that
+      departures from it can be flagged without someone specifying a threshold in
+      advance.</p></details>
+    <details><summary>Causal inference</summary>
+      <p>Methods for estimating whether a change caused an observed result rather than
+      merely preceding it. These require some form of comparison, which is far easier to
+      arrange before a change is rolled out than afterwards.</p></details>
     <details><summary>Model drift</summary>
-      <p>Performance decaying as the business changes. New customers, new SKUs, and new sites all shift
-      the patterns a model learned, which is why monitoring and retraining are part of the deliverable.</p></details>
+      <p>The gradual decline in a model's accuracy as conditions change. New customers,
+      SKUs, and sites all shift the patterns a model was fitted to, so periodic retraining
+      is part of operating it.</p></details>
     <details><summary>Data pipeline</summary>
-      <p>The automated path data takes from source systems to a form the model can use. Most of the effort
-      in a project lives here, and it is what makes results repeatable instead of one-off.</p></details>
+      <p>The automated path data takes from source systems into a form a model can use. A
+      large share of the work in most projects sits here, and it is what allows a result to
+      be reproduced rather than assembled once by hand.</p></details>
     <details><summary>Ground truth</summary>
-      <p>The recorded, verified outcome we compare predictions against. Without it a model can't be
-      trained or scored — which is why capturing outcomes is worth the effort even before a project
-      starts.</p></details>
+      <p>The recorded, verified outcome that predictions are compared against. Without it a
+      model cannot be trained or scored, which is why capturing outcomes is worth doing
+      even before a project exists.</p></details>
   </div>
 
   <hr>
 
-  <p class="aside">Missing a term you keep hearing? Send it over and it will be added here.</p>
+  <p class="aside">If a term comes up that is not here, let us know and it will be
+  added.</p>
 </section>
 
         <nav class="pager" id="pager" aria-label="Section navigation"></nav>

@@ -153,27 +153,44 @@
     show(location.hash.slice(1) || DOCS[0].id, { hash: false });
   });
 
-  /* ---------------- use-case filter ---------------- */
-  var chips = [].slice.call(document.querySelectorAll('.chip[data-filter]'));
-  var cards = [].slice.call(document.querySelectorAll('.card[data-cat]'));
+  /* ---------------- use-case filters ----------------
+     Two independent axes (function, problem type) combined with AND.
+     Scoped to #usecases so the problem-type cards in #problems are untouched. */
+  var groups = [].slice.call(document.querySelectorAll('#usecases .filters[data-axis]'));
+  var cards = [].slice.call(document.querySelectorAll('#usecases .card'));
   var cardsEmpty = document.getElementById('cards-empty');
+  var active = {};
 
-  chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      var key = chip.getAttribute('data-filter');
-      chips.forEach(function (c) {
-        var on = c === chip;
-        c.classList.toggle('on', on);
-        c.setAttribute('aria-pressed', String(on));
+  function applyFilters() {
+    var axes = Object.keys(active);
+    var shown = 0;
+    cards.forEach(function (card) {
+      var ok = axes.every(function (axis) {
+        if (active[axis] === 'all') return true;
+        var val = card.getAttribute('data-' + axis) || '';
+        return val.split(/\s+/).indexOf(active[axis]) !== -1;
       });
-      var shown = 0;
-      cards.forEach(function (card) {
-        var match = key === 'all' ||
-          card.getAttribute('data-cat').split(/\s+/).indexOf(key) !== -1;
-        card.hidden = !match;
-        if (match) shown++;
+      card.hidden = !ok;
+      if (ok) shown++;
+    });
+    if (cardsEmpty) cardsEmpty.hidden = shown !== 0;
+  }
+
+  groups.forEach(function (group) {
+    var axis = group.getAttribute('data-axis');
+    var groupChips = [].slice.call(group.querySelectorAll('.chip[data-filter]'));
+    active[axis] = 'all';
+
+    groupChips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        active[axis] = chip.getAttribute('data-filter');
+        groupChips.forEach(function (c) {
+          var on = c === chip;
+          c.classList.toggle('on', on);
+          c.setAttribute('aria-pressed', String(on));
+        });
+        applyFilters();
       });
-      if (cardsEmpty) cardsEmpty.hidden = shown !== 0;
     });
   });
 
