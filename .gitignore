@@ -1,0 +1,5 @@
+# JetBrains IDE
+.idea/
+
+# Design reference — 704KB, and would be served publicly if committed to docs/
+docs/template.html
