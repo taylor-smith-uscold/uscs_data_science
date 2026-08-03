@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="An internal guide to what data science is, the kinds of problems it addresses, and how our team works with operations, labor, transportation, energy, inventory, and commercial groups at a cold storage 3PL.">
+<meta name="description" content="An internal United States Cold Storage guide to what data science is, the kinds of problems it addresses, and how to bring a problem to the data science team.">
 <meta name="theme-color" content="#eaedf0" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1317" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Data Science at a Cold Storage 3PL — Internal Guide">
-<meta property="og:description" content="What data science is, the problem types it covers, and worked examples from cold chain operations.">
-<title>Data Science at a Cold Storage 3PL — Internal Guide</title>
+<meta property="og:title" content="United States Cold Storage — Data Science Guide">
+<meta property="og:description" content="What data science is, the problem types it covers, and how to bring a problem to the USCS data science team.">
+<title>United States Cold Storage — Data Science Guide</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❄</text></svg>">
 <link rel="stylesheet" href="styles.css">
 <noscript><style>
   /* Without JS there is no routing — render every section stacked. */
   .mdoc[hidden]{display:block!important;}
   .mdoc + .mdoc{margin-top:4em;padding-top:3em;border-top:1px solid var(--rule);}
-  .search,.toc,.pager,.filters,.filterrow{display:none!important;}
+  .search,.toc,.pager{display:none!important;}
 </style></noscript>
 </head>
 <body>
@@ -25,7 +25,7 @@
 
 <header class="top">
   <button class="iconbtn railtoggle" id="railtoggle" aria-label="Show section list" aria-expanded="false">≡</button>
-  <div class="brand"><b>Data&nbsp;Science</b><span>cold chain &amp; 3PL · 8 sections</span></div>
+  <div class="brand"><b>USCS&nbsp;Data&nbsp;Science</b><span>internal guide · 7 sections</span></div>
   <div class="grow"></div>
   <div class="search">
     <span class="mag" aria-hidden="true">⌕</span>
@@ -69,29 +69,22 @@
       <span class="pill">Types</span>
     </a>
 
-    <div class="arc"><div class="arc-l">Part two</div><div class="arc-n">applied</div></div>
-    <a class="mod" href="#usecases" data-doc="usecases">
-      <span class="mod-n">05</span>
-      <span class="mod-t">Examples from our operations</span>
-      <span class="pill">15</span>
-    </a>
-
-    <div class="arc"><div class="arc-l">Part three</div><div class="arc-n">working together</div></div>
+    <div class="arc"><div class="arc-l">Part two</div><div class="arc-n">working together</div></div>
     <a class="mod" href="#engage" data-doc="engage">
-      <span class="mod-n">06</span>
+      <span class="mod-n">05</span>
       <span class="mod-t">Bringing us a problem</span>
       <span class="pill">Process</span>
     </a>
     <a class="mod" href="#glossary" data-doc="glossary">
-      <span class="mod-n">07</span>
+      <span class="mod-n">06</span>
       <span class="mod-t">Glossary</span>
       <span class="pill">Ref</span>
     </a>
 
     <div class="railfoot">
+      United States Cold Storage<br>
       Data Science &amp; Analytics<br>
-      internal enablement<br>
-      <span class="railfoot-note">Examples describe problem types we can work on. They are not published results.</span>
+      <span class="railfoot-note">Examples illustrate problem types the team can work on. They are not published results.</span>
     </div>
   </nav>
 
@@ -102,22 +95,22 @@
 <!-- ═════════════════════════ 00 · OVERVIEW ═════════════════════════ -->
 <section class="mdoc" id="overview" data-title="About this guide">
   <div class="eyebrow"><span class="num">00</span><span>Orientation</span><span class="tag">Intro</span></div>
-  <h1>Data science at a cold storage 3PL</h1>
+  <h1>Data science at United States Cold Storage</h1>
 
-  <p><em>An internal guide to what our team does and the kinds of problems we can help
-  with. It is written for people who know the business well and have no particular reason
-  to know how modeling works.</em></p>
+  <p><em>An internal guide to what the USCS data science team does and the kinds of
+  problems we can help with. It is written for people who know the business well and have
+  no particular reason to know how modeling works.</em></p>
 
-  <p>The systems that run a cold storage operation record a great deal of what happens in
-  a building. Receipts, picks, appointments, gate times, temperature readings, work
-  orders, and billing transactions all leave a record, and most of that record is used
-  once at the moment of the transaction and then sits in a database. Data science is the
-  work of going back through it: answering questions that a single report cannot settle,
-  and producing estimates about things that have not happened yet.</p>
+  <p>The systems that run a USCS facility record a great deal of what happens in it.
+  Receipts, picks, appointments, gate times, temperature readings, work orders, and
+  billing transactions all leave a record, and most of that record is used once at the
+  moment of the transaction and then sits in a database. Data science is the work of going
+  back through it: answering questions that a single report cannot settle, and producing
+  estimates about things that have not happened yet.</p>
 
   <p>We wrote this guide because the most common reason a worthwhile project never starts
   is that the person closest to the problem did not realize it was the sort of thing to
-  ask about. Sections 04 and 05 are aimed at that specifically.</p>
+  ask about. <a href="#problems">Section 04</a> is aimed at that specifically.</p>
 
   <h2 id="ov-questions">Four kinds of question</h2>
 
@@ -127,7 +120,7 @@
 
   <div class="tablewrap">
   <table>
-    <thead><tr><th>Level</th><th>The question</th><th>In our business</th></tr></thead>
+    <thead><tr><th>Level</th><th>The question</th><th>At USCS</th></tr></thead>
     <tbody>
       <tr><td>Descriptive</td><td>What happened?</td><td>What did the warehouse receive yesterday, by customer and zone?</td></tr>
       <tr><td>Diagnostic</td><td>Why did it happen?</td><td>Why did dock dwell run high on Tuesdays last month?</td></tr>
@@ -143,19 +136,16 @@
 
   <p>The sections are arranged to be read in order the first time through, though nothing
   depends on that. If you already have a specific problem in mind,
-  <a href="#problems">section 04</a> lists the types of problems we work on and
-  <a href="#usecases">section 05</a> gives examples from our own operations.
-  <a href="#engage">Section 06</a> covers what to bring to a first conversation.</p>
+  <a href="#problems">section 04</a> lists the types of problems we work on, and
+  <a href="#engage">section 05</a> covers what to bring to a first conversation.</p>
 
   <dl class="kv kv-loose">
     <dt>Part one</dt>
     <dd>Sections 01 to 04: what the discipline is, how a project runs week to week, the
-        four levels of analytics, and a catalogue of problem types.</dd>
+        four levels of analytics, and a catalogue of problem types with a cold chain
+        illustration for each.</dd>
     <dt>Part two</dt>
-    <dd>Section 05: fifteen examples drawn from cold storage and 3PL operations, each with
-        the data it needs and the output it produces.</dd>
-    <dt>Part three</dt>
-    <dd>Sections 06 and 07: how to frame a problem so we can act on it, and definitions
+    <dd>Sections 05 and 06: how to frame a problem so we can act on it, and definitions
         for the terms that come up in a project kickoff.</dd>
   </dl>
 
@@ -356,7 +346,7 @@
   <div class="tablewrap">
   <table class="ladder">
     <thead>
-      <tr><th>Level</th><th>Question</th><th>What it involves</th><th>Cold chain example</th></tr>
+      <tr><th>Level</th><th>Question</th><th>What it involves</th><th>Example at USCS</th></tr>
     </thead>
     <tbody>
       <tr>
@@ -700,286 +690,18 @@
   <p>You do not need to identify the type before contacting us. Requests that arrive
   described as one type frequently turn out to be another, and some are answered
   adequately by a report or a query. Describing the decision, as covered in
-  <a href="#engage">section 06</a>, is enough to begin with.</p>
+  <a href="#engage">section 05</a>, is enough to begin with.</p>
 
-  <p><a href="#usecases">Section 05</a> gives fifteen examples from our operations, each
-  labeled with the problem type it belongs to and filterable by type as well as by
-  function.</p>
-</section>
-
-<!-- ═════════════════════════ 05 · USE CASES ═════════════════════════ -->
-<section class="mdoc wide" id="usecases" data-title="Examples from our operations" hidden>
-  <div class="eyebrow"><span class="num">05</span><span>Applied</span><span class="tag">15 examples</span></div>
-  <h1>Examples from our operations</h1>
-
-  <p><em>Fifteen examples of the problem types described in section 04, applied to work
-  that goes on in our buildings. Each gives the situation, the problem type, the data it
-  draws on, the method, and the output.</em></p>
-
-  <div class="filterrow">
-    <span class="filterlab">Function</span>
-    <div class="filters" data-axis="cat" role="group" aria-label="Filter examples by function">
-      <button class="chip on" data-filter="all" aria-pressed="true">All <span class="ct">15</span></button>
-      <button class="chip" data-filter="ops" aria-pressed="false">Warehouse ops</button>
-      <button class="chip" data-filter="labor" aria-pressed="false">Labor</button>
-      <button class="chip" data-filter="transport" aria-pressed="false">Transportation</button>
-      <button class="chip" data-filter="energy" aria-pressed="false">Energy</button>
-      <button class="chip" data-filter="inventory" aria-pressed="false">Inventory &amp; quality</button>
-      <button class="chip" data-filter="commercial" aria-pressed="false">Commercial &amp; finance</button>
-    </div>
-  </div>
-
-  <div class="filterrow">
-    <span class="filterlab">Problem type</span>
-    <div class="filters" data-axis="type" role="group" aria-label="Filter examples by problem type">
-      <button class="chip on" data-filter="all" aria-pressed="true">All</button>
-      <button class="chip" data-filter="forecasting" aria-pressed="false">Forecasting</button>
-      <button class="chip" data-filter="regression" aria-pressed="false">Regression</button>
-      <button class="chip" data-filter="classification" aria-pressed="false">Classification</button>
-      <button class="chip" data-filter="survival" aria-pressed="false">Time-to-event</button>
-      <button class="chip" data-filter="ranking" aria-pressed="false">Ranking</button>
-      <button class="chip" data-filter="anomaly" aria-pressed="false">Anomaly detection</button>
-      <button class="chip" data-filter="optimization" aria-pressed="false">Optimization</button>
-    </div>
-  </div>
-
-  <div class="cards" id="cards">
-
-    <!-- OPS -->
-    <article class="card" data-cat="ops labor" data-type="forecasting">
-      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Warehouse ops</span></div>
-      <h3>Inbound and outbound volume forecasting</h3>
-      <p class="prob">Shift plans are typically built from recent actuals and whatever the
-      customer has told us. When a promotion or a seasonal pack runs heavier than expected,
-      the site often learns about it as the trucks arrive, which leaves little room to
-      adjust staffing.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Time-series forecasting</dd>
-        <dt>Data</dt><dd>WMS receipt and order history, appointment schedule, customer forecasts, calendar and seasonality, promotional and holiday flags</dd>
-        <dt>Approach</dt><dd>Forecasting per site and customer, with prediction intervals and a bottom-up roll-up to the network</dd>
-        <dt>Output</dt><dd>A fourteen-day pallet and case forecast by site, refreshed daily, flagging days expected to exceed comfortable capacity</dd>
-      </dl>
-    </article>
-
-    <article class="card" data-cat="ops" data-type="optimization">
-      <div class="card-h"><span class="lvl lvl-x">Prescriptive</span><span class="fn">Warehouse ops</span></div>
-      <h3>Slotting and storage optimization</h3>
-      <p class="prob">Slot assignments drift out of date as SKU velocity changes. Fast
-      movers end up in locations that add travel to every pick, and re-slotting tends to
-      happen in response to a noticeable problem rather than on a schedule.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Optimization, informed by affinity analysis</dd>
-        <dt>Data</dt><dd>Pick history by SKU, location master and travel distances, pallet dimensions and weight, temperature zone constraints, lot and expiry rules</dd>
-        <dt>Approach</dt><dd>Velocity and affinity analysis feeding a constrained optimization that respects zone, stacking, and FEFO rules</dd>
-        <dt>Output</dt><dd>A ranked weekly re-slotting worklist sized to what a shift can absorb, with estimated travel saved per move</dd>
-      </dl>
-    </article>
-
-    <article class="card" data-cat="ops transport" data-type="regression optimization">
-      <div class="card-h"><span class="lvl lvl-x">Prescriptive</span><span class="fn">Warehouse ops</span></div>
-      <h3>Dock scheduling and trailer dwell</h3>
-      <p class="prob">Appointments cluster into the morning while doors sit idle later in
-      the day. Dwell and detention costs follow from the resulting congestion, and the
-      shape of the day is difficult to see until it is already underway.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Regression to predict service time, then optimization to build the schedule</dd>
-        <dt>Data</dt><dd>Appointment and gate timestamps, door assignment history, unload and load durations by load type, yard moves, labor availability</dd>
-        <dt>Approach</dt><dd>Predicted service time per load feeding a scheduling optimizer that levels arrivals across doors and hours</dd>
-        <dt>Output</dt><dd>A recommended appointment grid and door plan, plus same-day alerts when the schedule drifts toward a bottleneck</dd>
-      </dl>
-    </article>
-
-    <!-- LABOR -->
-    <article class="card" data-cat="labor" data-type="forecasting">
-      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Labor</span></div>
-      <h3>Labor demand planning</h3>
-      <p class="prob">Staffing is committed days in advance while volume arrives hour by
-      hour. The difference between the two is absorbed through overtime when volume runs
-      high and idle time when it runs low.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Time-series forecasting, converted to hours by activity</dd>
-        <dt>Data</dt><dd>Volume forecast, labor standards by activity, timeclock and attendance history, shift patterns, training and certification records</dd>
-        <dt>Approach</dt><dd>Convert forecast workload into required hours by function and hour of day, then match against the available roster</dd>
-        <dt>Output</dt><dd>A staffing recommendation by shift and function, showing projected overtime and understaffing risk together</dd>
-      </dl>
-    </article>
-
-    <article class="card" data-cat="labor" data-type="survival">
-      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Labor</span></div>
-      <h3>Turnover and retention analysis</h3>
-      <p class="prob">Freezer work is physically demanding and turnover is costly, since a
-      trained selector takes time to replace. Notice of a departure generally arrives after
-      the decision has already been made.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Time-to-event</dd>
-        <dt>Data</dt><dd>Tenure, shift and schedule stability, overtime load, absence patterns, pay progression, site and role, aggregated and privacy-reviewed</dd>
-        <dt>Approach</dt><dd>Cohort survival analysis identifying which conditions precede voluntary departures</dd>
-        <dt>Output</dt><dd>Site-level drivers of turnover ranked by estimated impact, so that intervention can target scheduling and workload</dd>
-      </dl>
-    </article>
-
-    <!-- TRANSPORT -->
-    <article class="card" data-cat="transport" data-type="optimization">
-      <div class="card-h"><span class="lvl lvl-x">Prescriptive</span><span class="fn">Transportation</span></div>
-      <h3>Route, mode and consolidation planning</h3>
-      <p class="prob">Shipments to nearby destinations sometimes move on separate trucks
-      because the opportunity to combine them was not visible at the moment each one was
-      tendered.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Optimization</dd>
-        <dt>Data</dt><dd>TMS order and shipment history, lane rates and accessorials, carrier performance, delivery windows, equipment and temperature requirements</dd>
-        <dt>Approach</dt><dd>Load-building and vehicle-routing optimization with temperature compatibility and appointment windows as hard constraints</dd>
-        <dt>Output</dt><dd>Suggested consolidations and mode changes with an estimated cost difference per option, surfaced before tender</dd>
-      </dl>
-    </article>
-
-    <article class="card" data-cat="transport ops" data-type="classification regression">
-      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Transportation</span></div>
-      <h3>Arrival-time and on-time delivery prediction</h3>
-      <p class="prob">Carrier ETAs are treated as fixed points when planning the day,
-      though actual arrival times vary considerably by lane, carrier, and time of year.
-      That variation is absorbed by the door schedule.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Classification for the on-time question, regression for the arrival window</dd>
-        <dt>Data</dt><dd>Historical gate-in and gate-out times, carrier and lane performance, distance and traffic patterns, weather, load type</dd>
-        <dt>Approach</dt><dd>Models producing a probability-weighted arrival window per load</dd>
-        <dt>Output</dt><dd>A live view of loads unlikely to make their window, early enough to reshuffle doors or notify the customer</dd>
-      </dl>
-    </article>
-
-    <!-- ENERGY -->
-    <article class="card" data-cat="energy" data-type="forecasting optimization">
-      <div class="card-h"><span class="lvl lvl-x">Prescriptive</span><span class="fn">Energy</span></div>
-      <h3>Refrigeration energy and peak demand</h3>
-      <p class="prob">Refrigeration is among the larger controllable costs in a building.
-      Demand charges are driven by a small number of peak intervals, which are difficult to
-      anticipate without modeling consumption directly.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Forecasting, then optimization within temperature limits</dd>
-        <dt>Data</dt><dd>Interval meter data, utility tariff structure, compressor and setpoint logs, room temperatures, ambient weather, door-open events, product load</dd>
-        <dt>Approach</dt><dd>Consumption modeling plus optimization of pre-cooling and load-shifting within safe temperature bands</dd>
-        <dt>Output</dt><dd>Day-ahead load-shift recommendations, peak-risk alerts, and site benchmarking normalized for weather and occupancy</dd>
-      </dl>
-    </article>
-
-    <article class="card" data-cat="energy ops" data-type="anomaly">
-      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Maintenance</span></div>
-      <h3>Condition monitoring for critical assets</h3>
-      <p class="prob">Equipment failures during a shift carry costs beyond the repair
-      itself, including product at risk and disruption to the schedule. Most of these
-      assets are instrumented, and readings in the period before a failure often differ
-      from normal operation.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Anomaly detection, with time-to-event where failure history is complete enough</dd>
-        <dt>Data</dt><dd>Equipment telemetry and alarm history, run hours, work orders and parts usage, ambient conditions, asset age and make</dd>
-        <dt>Approach</dt><dd>Anomaly detection on sensor patterns, scored on a rolling window</dd>
-        <dt>Output</dt><dd>A prioritized maintenance queue flagging assets drifting away from their own normal behavior</dd>
-      </dl>
-    </article>
-
-    <!-- INVENTORY -->
-    <article class="card" data-cat="inventory" data-type="anomaly ranking">
-      <div class="card-h"><span class="lvl lvl-d">Diagnostic</span><span class="fn">Inventory</span></div>
-      <h3>Inventory accuracy and shrink detection</h3>
-      <p class="prob">Cycle counting on a fixed rotation finds discrepancies some time
-      after they occur, by which point reconstructing the cause from transaction history is
-      difficult.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Anomaly detection, then ranking</dd>
-        <dt>Data</dt><dd>Transaction-level WMS movements, adjustment history, cycle count results, license plate and pallet genealogy, catch-weight variances</dd>
-        <dt>Approach</dt><dd>Anomaly detection across transaction patterns, with counting effort directed where error probability is highest</dd>
-        <dt>Output</dt><dd>A risk-ranked cycle count list in place of a fixed rotation, plus early flags on locations and processes generating variance</dd>
-      </dl>
-    </article>
-
-    <article class="card" data-cat="inventory" data-type="anomaly">
-      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Quality &amp; food safety</span></div>
-      <h3>Temperature excursion and shelf-life risk</h3>
-      <p class="prob">Excursions are generally reviewed after the fact. By the time the
-      event appears in a report the product has often moved, and the conversation with the
-      customer becomes a reactive one.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Anomaly detection on sensor series</dd>
-        <dt>Data</dt><dd>Room and trailer temperature telemetry, door-open events, receipt and ship timestamps, product tolerance specs, lot and expiry data</dd>
-        <dt>Approach</dt><dd>Anomaly detection on temperature curves, combined with cumulative time-temperature exposure scoring by lot</dd>
-        <dt>Output</dt><dd>Excursion alerts routed to the right person, and a lot-level risk view supporting FEFO and traceability decisions</dd>
-      </dl>
-    </article>
-
-    <article class="card" data-cat="inventory commercial" data-type="forecasting">
-      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Space planning</span></div>
-      <h3>Space and capacity planning</h3>
-      <p class="prob">Occupancy tends to be managed against a monthly figure while the
-      constraint actually binds in particular weeks. Committing space that will not be
-      available is considerably more expensive than knowing about the conflict early.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Time-series forecasting, with scenario simulation</dd>
-        <dt>Data</dt><dd>Pallet position inventory over time, contracted versus actual usage by customer, inbound forecast, dwell-time distributions by SKU</dd>
-        <dt>Approach</dt><dd>Forecast inbound and outbound flows to project occupancy forward, with simulation of customer-mix scenarios</dd>
-        <dt>Output</dt><dd>A projected occupancy curve by site with at-risk weeks highlighted, giving sales and operations time to place volume elsewhere</dd>
-      </dl>
-    </article>
-
-    <!-- COMMERCIAL -->
-    <article class="card" data-cat="commercial" data-type="regression">
-      <div class="card-h"><span class="lvl lvl-d">Diagnostic</span><span class="fn">Finance</span></div>
-      <h3>Customer and SKU profitability</h3>
-      <p class="prob">Revenue by customer is visible directly; cost to serve is not,
-      because it depends on the mix of activities an account generates. Two accounts with
-      similar storage volumes can place very different demands on labor and dock
-      capacity.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Regression, applied to activity-based costing</dd>
-        <dt>Data</dt><dd>Billing and rate tables, activity-level transactions (receipts, picks, loads, blast, VAS), labor minutes by activity, space occupied over time</dd>
-        <dt>Approach</dt><dd>Activity-based costing driven by measured effort, then margin decomposition by customer, site, and SKU profile</dd>
-        <dt>Output</dt><dd>A margin breakdown per account showing which activities consume it, as an evidence base for renewal and rate conversations</dd>
-      </dl>
-    </article>
-
-    <article class="card" data-cat="commercial" data-type="classification">
-      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Commercial</span></div>
-      <h3>Volume-decline early warning</h3>
-      <p class="prob">Accounts that leave usually decline gradually first, through falling
-      volume and changing order patterns. Those signals are spread across months of
-      transactions and are not obvious in a monthly summary.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Classification, with change-point detection</dd>
-        <dt>Data</dt><dd>Volume and order-frequency trends, service performance history, claims and complaints, contract terms and renewal dates</dd>
-        <dt>Approach</dt><dd>Change-point detection on account trajectories combined with a classification model for attrition risk</dd>
-        <dt>Output</dt><dd>A monthly watch list for account managers ordered by revenue at risk, with the signals that triggered each flag</dd>
-      </dl>
-    </article>
-
-    <article class="card" data-cat="commercial" data-type="regression">
-      <div class="card-h"><span class="lvl lvl-p">Predictive</span><span class="fn">Pricing</span></div>
-      <h3>Quote and rate decision support</h3>
-      <p class="prob">New business is often priced against comparable accounts. Pallet
-      counts alone are a weak guide to what an account will cost to serve, since handling
-      intensity and seasonality vary widely between accounts with similar storage
-      footprints.</p>
-      <dl class="kv">
-        <dt>Problem type</dt><dd>Regression</dd>
-        <dt>Data</dt><dd>Historical quotes and outcomes, realized cost to serve by account profile, site capacity and constraints, seasonality of the incoming volume</dd>
-        <dt>Approach</dt><dd>Predicted cost to serve for the proposed profile, combined with margin scenarios across a rate range</dd>
-        <dt>Output</dt><dd>A pre-quote profitability estimate with sensitivity to volume and mix assumptions</dd>
-      </dl>
-    </article>
-
-  </div>
-
-  <p class="nohit" id="cards-empty" hidden>No examples match that combination of filters.</p>
-
-  <hr>
-
-  <p class="aside">These describe problem types that suit the industry, not projects with
-  published results. No throughput, savings, or accuracy figures are claimed for any of
-  them. Any project involving employee or customer data goes through privacy, security,
-  and food-safety governance review before work begins.</p>
+  <p class="aside">The illustrations above indicate where each method tends to apply in a
+  temperature-controlled operation. They are not descriptions of work USCS has completed,
+  and no throughput, savings, or accuracy figures are claimed for any of them. Any project
+  involving employee or customer data goes through privacy, security, and food-safety
+  governance review before work begins.</p>
 </section>
 
 <!-- ═════════════════════════ 06 · ENGAGE ═════════════════════════ -->
 <section class="mdoc" id="engage" data-title="Bringing us a problem" hidden>
-  <div class="eyebrow"><span class="num">06</span><span>Working together</span><span class="tag">Process</span></div>
+  <div class="eyebrow"><span class="num">05</span><span>Working together</span><span class="tag">Process</span></div>
   <h1>Bringing us a problem</h1>
 
   <p><em>Working out which method applies is our job. What we need from you is an account
@@ -1051,7 +773,7 @@
 
 <!-- ═════════════════════════ 07 · GLOSSARY ═════════════════════════ -->
 <section class="mdoc" id="glossary" data-title="Glossary" hidden>
-  <div class="eyebrow"><span class="num">07</span><span>Reference</span><span class="tag">Ref</span></div>
+  <div class="eyebrow"><span class="num">06</span><span>Reference</span><span class="tag">Ref</span></div>
   <h1>Glossary</h1>
 
   <p><em>Terms that come up in a project kickoff, in plain language.</em></p>

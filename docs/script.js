@@ -1,5 +1,5 @@
 /* ============================================================
-   Data Science in the Cold Chain — reader behavior
+   United States Cold Storage — data science guide, reader behavior
    Section routing, on-page contents, pager, search, theme.
    No dependencies. Without JS every section renders stacked.
    ============================================================ */
@@ -126,7 +126,7 @@
 
     buildTOC(doc);
     buildPager(DOCS.indexOf(doc));
-    document.title = doc.title + ' — Data Science in the Cold Chain';
+    document.title = doc.title + ' — USCS Data Science Guide';
 
     if (opts.hash !== false && location.hash.slice(1) !== doc.id) {
       // pushState throws on file:// in some browsers; the hash fallback still works.
@@ -151,47 +151,6 @@
 
   window.addEventListener('popstate', function () {
     show(location.hash.slice(1) || DOCS[0].id, { hash: false });
-  });
-
-  /* ---------------- use-case filters ----------------
-     Two independent axes (function, problem type) combined with AND.
-     Scoped to #usecases so the problem-type cards in #problems are untouched. */
-  var groups = [].slice.call(document.querySelectorAll('#usecases .filters[data-axis]'));
-  var cards = [].slice.call(document.querySelectorAll('#usecases .card'));
-  var cardsEmpty = document.getElementById('cards-empty');
-  var active = {};
-
-  function applyFilters() {
-    var axes = Object.keys(active);
-    var shown = 0;
-    cards.forEach(function (card) {
-      var ok = axes.every(function (axis) {
-        if (active[axis] === 'all') return true;
-        var val = card.getAttribute('data-' + axis) || '';
-        return val.split(/\s+/).indexOf(active[axis]) !== -1;
-      });
-      card.hidden = !ok;
-      if (ok) shown++;
-    });
-    if (cardsEmpty) cardsEmpty.hidden = shown !== 0;
-  }
-
-  groups.forEach(function (group) {
-    var axis = group.getAttribute('data-axis');
-    var groupChips = [].slice.call(group.querySelectorAll('.chip[data-filter]'));
-    active[axis] = 'all';
-
-    groupChips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        active[axis] = chip.getAttribute('data-filter');
-        groupChips.forEach(function (c) {
-          var on = c === chip;
-          c.classList.toggle('on', on);
-          c.setAttribute('aria-pressed', String(on));
-        });
-        applyFilters();
-      });
-    });
   });
 
   /* ---------------- search ---------------- */
