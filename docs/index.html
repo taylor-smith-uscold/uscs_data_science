@@ -125,7 +125,7 @@
       <tr><td>Descriptive</td><td>What happened?</td><td>What did the warehouse receive yesterday, by customer and zone?</td></tr>
       <tr><td>Diagnostic</td><td>Why did it happen?</td><td>Why did dock dwell run high on Tuesdays last month?</td></tr>
       <tr><td>Predictive</td><td>What is likely next?</td><td>How many inbound pallets should we staff for next week?</td></tr>
-      <tr><td>Prescriptive</td><td>What should we do?</td><td>Which slots should we re-profile tonight, and in what order?</td></tr>
+      <tr><td>Prescriptive</td><td>What should we do?</td><td>Which SKUs should we re-zone to account for seasonality and how much travel time will that reduce?</td></tr>
     </tbody>
   </table>
   </div>
@@ -194,11 +194,8 @@
     <div class="pillar">
       <span class="pillar-n">Ⅲ</span>
       <h3>Domain knowledge</h3>
-      <p>A blast freeze order and a dry-pick order look similar in a transaction table and
-      behave nothing alike. Catch-weight items complicate every conversion between cases,
-      pounds, and pallets. Lot traceability and FSMA requirements constrain what a
-      recommendation is permitted to suggest. We depend on the people who work with these
-      things daily to tell us when a result does not match what they observe.</p>
+      <p>Data alone cannot tell the whole story. We depend on the knowledge, intuition, and expertise of people who work with these
+      systems daily to tell us when a result does not match what they observe or expect.</p>
     </div>
   </div>
 
@@ -211,7 +208,7 @@
 
   <div class="twoup">
     <div class="panel panel-a">
-      <h4>What it does</h4>
+      <h4>What Data Science does</h4>
       <ul>
         <li>Answers questions where the outcome depends on several factors at once, which
             is the usual reason a report has not settled the matter.</li>
@@ -223,7 +220,7 @@
       </ul>
     </div>
     <div class="panel panel-b">
-      <h4>What it does not do</h4>
+      <h4>What Data Science does not do</h4>
       <ul>
         <li>Anticipate conditions with no precedent. Models are fitted to history, and a
             genuinely new situation falls outside what they have seen.</li>
@@ -258,7 +255,7 @@
       <h3>Frame the decision</h3>
       <p>Establish who makes the decision, how often it comes up, and what they would do
       differently with a better answer. We would rather learn at this stage that the answer
-      would not change anything, since stopping here costs a conversation.</p>
+      would not change anything, because unnecessary research and development costs money.</p>
     </li>
     <li>
       <h3>Gather and understand the data</h3>
@@ -269,8 +266,8 @@
     </li>
     <li>
       <h3>Prepare and explore</h3>
-      <p>Clean, join, and shape the data, then go through it with whoever knows the
-      process. Where the numbers and the floor disagree, the disagreement is usually
+      <p>Clean, join, and shape the data, review it with process domain experts.
+      Where the numbers and the floor disagree, the disagreement is usually
       informative in its own right.</p>
     </li>
     <li>
@@ -290,7 +287,7 @@
       <h3>Deploy into the workflow</h3>
       <p>Put the output where the decision happens: a report, an alert, or a screen in a
       system already in use. We try to settle this early, since it often constrains what
-      the model can look like.</p>
+      the model can look like and how quickly it must operate.</p>
     </li>
     <li>
       <h3>Monitor and improve</h3>
@@ -308,29 +305,25 @@
   <em>“forecast inbound volume with a neural network”</em> does not describe a project. It
   names a method with no stated user, timing, or purpose, and there is no way to tell
   whether it succeeded. <em>“Give the shift planner a seven-day pallet forecast by Thursday
-  afternoon, so labor can be scheduled against it”</em> does describe one: it identifies who
-  receives the output, when they need it, and what they will do with it. Requests that
-  arrive in the second form are considerably easier to evaluate, and we can usually help
-  turn one into the other during intake.</p>
+  afternoon, so labor can be scheduled against it”</em> does describe one: it identifies (1) who
+  receives the output, (2) when they need it, and (3) what they will do with it.</p>
 
-  <h2 id="h-time">Typical timeline</h2>
+  <h2 id="h-time">Stages of a project</h2>
 
   <div class="tablewrap">
   <table>
-    <thead><tr><th>Stage</th><th>Typical span</th><th>What comes out of it</th></tr></thead>
+    <thead><tr><th>Stage</th><th>What comes out of it</th></tr></thead>
     <tbody>
-      <tr><td>Intake</td><td>Week 0</td><td>The problem restated as a decision, and a shared view of whether it is worth pursuing</td></tr>
-      <tr><td>Feasibility</td><td>Weeks 1–2</td><td>A go or no-go on data availability and signal, with the reasoning behind it</td></tr>
-      <tr><td>Prototype</td><td>Weeks 3–8</td><td>A working model reviewed with the business expert and tested against history</td></tr>
-      <tr><td>Pilot</td><td>Ongoing</td><td>One site running it for real, with accuracy and use tracked</td></tr>
-      <tr><td>Production</td><td>Ongoing</td><td>Automated refresh, monitoring, retraining, and extension to other sites where results hold</td></tr>
+      <tr><td>Intake</td><td>The problem restated as a decision, and a shared view of whether it is worth pursuing</td></tr>
+      <tr><td>Feasibility</td><td>A go or no-go on data availability and signal, with the reasoning behind it</td></tr>
+      <tr><td>Prototype</td><td>A working model reviewed with the business expert and tested against history</td></tr>
+      <tr><td>Pilot</td><td>One site running it for real, with accuracy and use tracked</td></tr>
+      <tr><td>Production</td><td>Automated refresh, monitoring, retraining, and extension to other sites where results hold</td></tr>
     </tbody>
   </table>
   </div>
 
-  <p class="aside">These spans are rough. A forecasting problem on clean WMS data moves
-  faster than an optimization problem that first requires a new data capture step on the
-  floor.</p>
+  <p class="aside">How long each stage takes varies considerably based on data availability, data cleanliness, and problem scope.</p>
 </section>
 
 <!-- ═════════════════════════ 03 · MATURITY ═════════════════════════ -->
@@ -756,12 +749,12 @@
 
   <div class="tablewrap">
   <table>
-    <thead><tr><th>When</th><th>What we do</th><th>What comes back</th></tr></thead>
+    <thead><tr><th>What we do</th><th>What comes back</th></tr></thead>
     <tbody>
-      <tr><td>Week 0</td><td>Intake conversation</td><td>The problem restated as a decision, and a view on whether it is worth pursuing</td></tr>
-      <tr><td>Weeks 1–2</td><td>Feasibility check</td><td>A go or no-go on data availability and signal, with the reasoning shown</td></tr>
-      <tr><td>Weeks 3–8</td><td>Prototype</td><td>A working model reviewed with you and tested against history</td></tr>
-      <tr><td>Ongoing</td><td>Pilot, then production</td><td>One site live, then extension where results hold, with monitoring in place</td></tr>
+      <tr><td>Intake conversation</td><td>The problem restated as a decision, and a view on whether it is worth pursuing</td></tr>
+      <tr><td>Feasibility check</td><td>A go or no-go on data availability and signal, with the reasoning shown</td></tr>
+      <tr><td>Prototype</td><td>A working model reviewed with you and tested against history</td></tr>
+      <tr><td>Pilot, then production</td><td>One site live, then extension where results hold, with monitoring in place</td></tr>
     </tbody>
   </table>
   </div>
