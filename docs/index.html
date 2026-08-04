@@ -459,8 +459,8 @@
         <dt>Answers</dt><dd>How many, how much, how long.</dd>
         <dt>Needs</dt><dd>Historical records where the value was measured, together with the conditions that preceded it.</dd>
         <dt>Returns</dt><dd>A predicted number, normally with a range around it.</dd>
-        <dt>Here</dt><dd>Expected minutes to unload a load; cost to serve for a proposed account; expected pick time for an order profile.</dd>
-        <dt>Watch for</dt><dd>The range matters as much as the estimate. A prediction of 47 minutes that could plausibly fall between 20 and 90 is a different planning input than one that falls between 44 and 50.</dd>
+        <dt>Examples</dt><dd>Expected minutes to unload a load; cost to serve for a proposed account; expected pick time for an order profile.</dd>
+        <dt>Caveats</dt><dd>The range matters as much as the estimate. A prediction of 47 minutes that could plausibly fall between 20 and 90 is a different planning input than one that falls between 44 and 50.</dd>
       </dl>
     </article>
 
@@ -473,8 +473,8 @@
         <dt>Answers</dt><dd>Will this happen? Which of these categories does it belong to?</dd>
         <dt>Needs</dt><dd>History where the outcome category was recorded, with enough examples of the rarer category to learn from.</dd>
         <dt>Returns</dt><dd>A probability, which becomes a yes or no once a threshold is chosen.</dd>
-        <dt>Here</dt><dd>Whether a load will miss its delivery window; whether an inventory adjustment is likely to be an error.</dd>
-        <dt>Watch for</dt><dd>Where the outcome is rare, overall accuracy is misleading, since predicting “no” every time can score well and be useless. Choosing the threshold is a business decision about the relative cost of a false alarm and a miss.</dd>
+        <dt>Examples</dt><dd>Whether a load will miss its delivery window; whether an inventory adjustment is likely to be an error.</dd>
+        <dt>Caveats</dt><dd>Where the outcome is rare, overall accuracy is misleading, since predicting “no” every time can score well and be useless. Choosing the threshold is a business decision about the relative cost of a false alarm and a miss.</dd>
       </dl>
     </article>
 
@@ -488,8 +488,8 @@
         <dt>Answers</dt><dd>How much on each of the next N days or weeks?</dd>
         <dt>Needs</dt><dd>A consistent history of the quantity over time, ideally covering several cycles of whatever seasonality matters.</dd>
         <dt>Returns</dt><dd>A value per future period, with intervals that widen further out.</dd>
-        <dt>Here</dt><dd>Pallets received per site per day; case volume by customer through a seasonal peak.</dd>
-        <dt>Watch for</dt><dd>Known future events such as a promotion, a customer onboarding, or a plant shutdown have to be supplied as inputs. The model cannot infer them from history.</dd>
+        <dt>Examples</dt><dd>Pallets received per site per day; case volume by customer through a seasonal peak.</dd>
+        <dt>Caveats</dt><dd>Known future events such as a promotion, a customer onboarding, or a plant shutdown have to be supplied as inputs. The model cannot infer them from history.</dd>
       </dl>
     </article>
 
@@ -502,8 +502,8 @@
         <dt>Answers</dt><dd>When is this likely to happen? What is the chance it happens within the next N months?</dd>
         <dt>Needs</dt><dd>Records with a start date and either an event date or confirmation that the event had not occurred as of a known date.</dd>
         <dt>Returns</dt><dd>A probability curve over time rather than a single date.</dd>
-        <dt>Here</dt><dd>Time until a piece of equipment needs unplanned service; tenure patterns across a hiring cohort.</dd>
-        <dt>Watch for</dt><dd>The treatment of records where the event has not happened yet is the whole point of the method. Dropping them, or treating them as if the event never occurs, biases the result in opposite directions.</dd>
+        <dt>Examples</dt><dd>Time until a piece of equipment needs unplanned service; tenure patterns across a hiring cohort.</dd>
+        <dt>Caveats</dt><dd>The treatment of records where the event has not happened yet is the whole point of the method. Dropping them, or treating them as if the event never occurs, biases the result in opposite directions.</dd>
       </dl>
     </article>
 
@@ -517,8 +517,8 @@
         <dt>Answers</dt><dd>Given that we can only get to twenty of these today, which twenty?</dd>
         <dt>Needs</dt><dd>A per-item estimate of value or risk, and a realistic view of the capacity available to act on it.</dd>
         <dt>Returns</dt><dd>An ordered worklist, ideally cut to the length that can actually be worked.</dd>
-        <dt>Here</dt><dd>Which locations to cycle count first; which accounts an account manager should contact this month.</dd>
-        <dt>Watch for</dt><dd>A list longer than the available capacity tends to be ignored altogether. Sizing the output to the work that can realistically be done is part of the design.</dd>
+        <dt>Examples</dt><dd>Which locations to cycle count first; which accounts an account manager should contact this month.</dd>
+        <dt>Caveats</dt><dd>A list longer than the available capacity tends to be ignored altogether. Sizing the output to the work that can realistically be done is part of the design.</dd>
       </dl>
     </article>
 
@@ -542,8 +542,8 @@
         <dt>Answers</dt><dd>What natural groupings exist in this population?</dd>
         <dt>Needs</dt><dd>A set of comparable attributes per record. No recorded outcome required.</dd>
         <dt>Returns</dt><dd>A group assignment per record, and a profile of what makes each group distinct.</dd>
-        <dt>Here</dt><dd>SKU handling profiles as an input to slotting policy; customer segments defined by how accounts actually use the building rather than by size.</dd>
-        <dt>Watch for</dt><dd>There is no correct number of groups and no objective right answer. Clusters are worth keeping when they imply a different action for each group. Otherwise they are a description with nothing attached to it.</dd>
+        <dt>Examples</dt><dd>SKU handling profiles as an input to slotting policy; customer segments defined by how accounts actually use the building rather than by size.</dd>
+        <dt>Caveats</dt><dd>There is no correct number of groups and no objective right answer. Clusters are worth keeping when they imply a different action for each group. Otherwise they are a description with nothing attached to it.</dd>
       </dl>
     </article>
 
@@ -557,8 +557,8 @@
         <dt>Answers</dt><dd>Is this reading, transaction, or pattern unusual for this asset or process?</dd>
         <dt>Needs</dt><dd>Enough history of normal operation. Recorded examples of failures help but are not strictly required.</dd>
         <dt>Returns</dt><dd>A flag with a score indicating how far the observation sits from normal.</dd>
-        <dt>Here</dt><dd>A compressor drawing more power than its own history would predict; unusual adjustment patterns at a location.</dd>
-        <dt>Watch for</dt><dd>Unusual is not the same as wrong. Every anomaly system needs a route for someone to confirm or dismiss a flag, and that feedback is what keeps the alert volume manageable.</dd>
+        <dt>Examples</dt><dd>A compressor drawing more power than its own history would predict; unusual adjustment patterns at a location.</dd>
+        <dt>Caveats</dt><dd>Unusual is not the same as wrong. Every anomaly system needs a route for someone to confirm or dismiss a flag, and that feedback is what keeps the alert volume manageable.</dd>
       </dl>
     </article>
 
@@ -571,8 +571,8 @@
         <dt>Answers</dt><dd>What tends to appear alongside what?</dd>
         <dt>Needs</dt><dd>Transaction records that group items into baskets, orders, or events.</dd>
         <dt>Returns</dt><dd>Pairs or sets, with measures of how strong and how frequent the association is.</dd>
-        <dt>Here</dt><dd>SKUs frequently picked on the same order, which feeds slotting; alarm codes that tend to precede a particular failure.</dd>
-        <dt>Watch for</dt><dd>Co-occurrence can reflect a shared cause rather than a relationship worth acting on, and sheer volume will make popular items appear associated with nearly everything.</dd>
+        <dt>Examples</dt><dd>SKUs frequently picked on the same order, which feeds slotting; alarm codes that tend to precede a particular failure.</dd>
+        <dt>Caveats</dt><dd>Co-occurrence can reflect a shared cause rather than a relationship worth acting on, and sheer volume will make popular items appear associated with nearly everything.</dd>
       </dl>
     </article>
 
@@ -585,8 +585,8 @@
         <dt>Answers</dt><dd>Can these forty sensor channels be summarized into something a person can monitor?</dd>
         <dt>Needs</dt><dd>Many numeric attributes measured consistently across records.</dd>
         <dt>Returns</dt><dd>A small number of derived indices, with a description of what each one captures.</dd>
-        <dt>Here</dt><dd>A health index per refrigeration asset built from many telemetry channels; condensing a wide activity profile before clustering it.</dd>
-        <dt>Watch for</dt><dd>The derived indices are combinations of the originals, and their interpretation is not always obvious. This is more often a preparation step than a deliverable in itself.</dd>
+        <dt>Examples</dt><dd>A health index per refrigeration asset built from many telemetry channels; condensing a wide activity profile before clustering it.</dd>
+        <dt>Caveats</dt><dd>The derived indices are combinations of the originals, and their interpretation is not always obvious. This is more often a preparation step than a deliverable in itself.</dd>
       </dl>
     </article>
 
@@ -610,8 +610,8 @@
         <dt>Answers</dt><dd>Given our costs, capacity, and rules, what is the best assignment or schedule?</dd>
         <dt>Needs</dt><dd>Constraints written down explicitly, an objective people agree on, and reliable input data.</dd>
         <dt>Returns</dt><dd>A specific recommended plan, usually with the cost difference against the current one.</dd>
-        <dt>Here</dt><dd>Door and appointment assignment; load building and routing; a re-slotting move list.</dd>
-        <dt>Watch for</dt><dd>Writing down the constraints is normally the hard part. Rules that are followed on the floor but never documented will be violated by the solver, and the recommendation will be dismissed for good reason.</dd>
+        <dt>Examples</dt><dd>Door and appointment assignment; load building and routing; a re-slotting move list.</dd>
+        <dt>Caveats</dt><dd>Writing down the constraints is normally the hard part. Rules that are followed on the floor but never documented will be violated by the solver, and the recommendation will be dismissed for good reason.</dd>
       </dl>
     </article>
 
@@ -625,8 +625,8 @@
         <dt>Answers</dt><dd>What would happen if we changed this? How bad is the worst plausible case?</dd>
         <dt>Needs</dt><dd>A description of the process, distributions for the variable parts, and historical data to calibrate against.</dd>
         <dt>Returns</dt><dd>A distribution of outcomes per scenario rather than a single figure.</dd>
-        <dt>Here</dt><dd>The effect on dwell of adding two doors or changing the appointment grid; staffing needed to absorb a seasonal peak.</dd>
-        <dt>Watch for</dt><dd>A simulation is only as good as its assumptions and will produce plausible-looking output whether or not they hold. Reproducing a period that already happened is the usual check.</dd>
+        <dt>Examples</dt><dd>The effect on dwell of adding two doors or changing the appointment grid; staffing needed to absorb a seasonal peak.</dd>
+        <dt>Caveats</dt><dd>A simulation is only as good as its assumptions and will produce plausible-looking output whether or not they hold. Reproducing a period that already happened is the usual check.</dd>
       </dl>
     </article>
 
@@ -652,8 +652,8 @@
         <dt>Answers</dt><dd>Did this change cause the improvement, and how large was the effect?</dd>
         <dt>Needs</dt><dd>Some basis for comparison, such as sites, shifts, or periods that did not receive the change, along with measurements from before and after.</dd>
         <dt>Returns</dt><dd>An estimated effect size with an interval, and an explicit statement of the assumptions it rests on.</dd>
-        <dt>Here</dt><dd>Whether a revised pick path raised cases per hour or whether volume mix explains it; whether a rate change affected volume.</dd>
-        <dt>Watch for</dt><dd>Before-and-after comparisons with no control group are the most common way a modest effect gets reported as a large one. Deciding how the comparison will be made before a change is rolled out costs very little and improves the answer considerably.</dd>
+        <dt>Examples</dt><dd>Whether a revised pick path raised cases per hour or whether volume mix explains it; whether a rate change affected volume.</dd>
+        <dt>Caveats</dt><dd>Before-and-after comparisons with no control group are the most common way a modest effect gets reported as a large one. Deciding how the comparison will be made before a change is rolled out costs very little and improves the answer considerably.</dd>
       </dl>
     </article>
 
@@ -672,8 +672,8 @@
         <dt>Answers</dt><dd>What are people actually recording in these notes, and how often?</dd>
         <dt>Needs</dt><dd>A body of text records, and agreement on which categories or fields would be useful.</dd>
         <dt>Returns</dt><dd>Categories, extracted values, or summaries attached to each record.</dd>
-        <dt>Here</dt><dd>Categorizing claims and complaints by cause; pulling equipment and fault details out of maintenance notes.</dd>
-        <dt>Watch for</dt><dd>Free text tends to be inconsistent, abbreviated, and specific to a site or a person. Some manual labeling is nearly always needed to set the categories and check the output, and text on its own rarely settles a question without structured data alongside it.</dd>
+        <dt>Example</dt><dd>Categorizing claims and complaints by cause; pulling equipment and fault details out of maintenance notes.</dd>
+        <dt>Caveats</dt><dd>Free text tends to be inconsistent, abbreviated, and specific to a site or a person. Some manual labeling is nearly always needed to set the categories and check the output, and text on its own rarely settles a question without structured data alongside it.</dd>
       </dl>
     </article>
 
@@ -688,11 +688,7 @@
   adequately by a report or a query. Describing the decision, as covered in
   <a href="#engage">section 05</a>, is enough to begin with.</p>
 
-  <p class="aside">The illustrations above indicate where each method tends to apply in a
-  temperature-controlled operation. They are not descriptions of work USCS has completed,
-  and no throughput, savings, or accuracy figures are claimed for any of them. Any project
-  involving employee or customer data goes through privacy, security, and food-safety
-  governance review before work begins.</p>
+  <p class="aside">The examples above are for demonstrative purpose and are not examples of work that we have completed.</p>
 </section>
 
 <!-- ═════════════════════════ 06 · ENGAGE ═════════════════════════ -->
